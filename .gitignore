@@ -38,6 +38,9 @@ yarn-error.log
 .continue
 .windsurf
 .env.before_lerd
+/.lerd.yaml
+/boost.json
+/AGENTS.md
 .lerd.yaml
 .node-version
 .php-version
