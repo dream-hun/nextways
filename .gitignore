@@ -27,4 +27,19 @@ yarn-error.log
 /.nova
 /.vscode
 /.zed
+
+# AI tooling and local agent state
+/.ai
+/.agents
+/.codex
+/.claude
+/.cursor
+.aider*
+.continue
+.windsurf
 .env.before_lerd
+.lerd.yaml
+.node-version
+.php-version
+boost.json
+AGENTS.md
