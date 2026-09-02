@@ -41,8 +41,6 @@ yarn-error.log
 /.lerd.yaml
 /boost.json
 /AGENTS.md
-.lerd.yaml
-.node-version
-.php-version
-boost.json
-AGENTS.md
+/.node-version
+/.php-version
+/skills-lock.json
