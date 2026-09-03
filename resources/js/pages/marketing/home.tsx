@@ -1,4 +1,3 @@
-/* Field Notes / Editorial Practice: warm paper field, Next Ways Forest anchor, DM Serif Display + Manrope, editorial splits, field-note labels, restrained transform/opacity motion. */
 import {
     ActionButton,
     CameraDepthScene,
@@ -83,9 +82,6 @@ export default function Home() {
                 <CameraDepthScene kind="home" />
                 <div className="hero-inner">
                     <div className="hero-copy">
-                        <div className="eyebrow reveal">
-                            Environmental · Agribusiness · Sustainability
-                        </div>
                         <h1 className="display reveal delay-1">
                             Sustainable solutions. <em>Grounded</em> in
                             evidence.

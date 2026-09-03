@@ -42,7 +42,6 @@
     -webkit-tap-highlight-color: transparent;
 }
 .marketing-shell a {
-    color: inherit;
     text-decoration: none;
 }
 .marketing-shell button {
@@ -141,7 +140,7 @@
     position: relative;
     padding: 11px 14px;
     color: var(--muted);
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 800;
     letter-spacing: 0.11em;
     text-transform: uppercase;
@@ -175,7 +174,7 @@
     border-radius: 999px;
     color: var(--paper);
     background: var(--forest);
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 800;
     letter-spacing: 0.1em;
     text-transform: uppercase;
@@ -295,7 +294,7 @@
     border-top: 1px solid rgba(245, 244, 235, 0.25);
     padding-top: 16px;
     color: rgba(245, 244, 235, 0.68);
-    font-size: 10px;
+    font-size: 12px;
     font-weight: 800;
     letter-spacing: 0.16em;
     text-transform: uppercase;
@@ -306,7 +305,7 @@
     align-items: center;
     gap: 9px;
     color: var(--sage);
-    font-size: 10px;
+    font-size: 12px;
     font-weight: 800;
     letter-spacing: 0.2em;
     line-height: 1.2;
@@ -320,7 +319,7 @@
 }
 .kicker {
     color: var(--forest);
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 800;
     letter-spacing: 0.18em;
     text-transform: uppercase;
@@ -328,6 +327,7 @@
 .display {
     margin: 18px 0 0;
     font-family: 'DM Serif Display', serif;
+    font-size: clamp(2.75rem, 5vw, 5.5rem);
     font-weight: 400;
     letter-spacing: -0.035em;
     line-height: 0.95;
@@ -358,7 +358,8 @@
     min-height: 100dvh;
     display: flex;
     align-items: flex-end;
-    padding: 150px 0 72px;
+    padding: 128px 0 52px;
+    overflow: clip;
     isolation: isolate;
 }
 .hero-home {
@@ -399,17 +400,17 @@
     margin-inline: auto;
 }
 .hero-home .hero-copy {
-    width: min(740px, 70vw);
+    width: min(740px, 100%);
 }
 .hero h1 {
     max-width: 760px;
-    font-size: clamp(3.7rem, 8.3vw, 8.4rem);
+    font-size: clamp(3.7rem, 7vw, 7.2rem);
 }
 .hero .hero-lede {
     width: min(500px, 100%);
     margin: 28px 0 0;
     color: rgba(253, 251, 247, 0.78);
-    font-size: 16px;
+    font-size: 17px;
     line-height: 1.75;
 }
 .hero-actions {
@@ -423,11 +424,11 @@
     align-items: center;
     justify-content: space-between;
     gap: 24px;
-    margin-top: 88px;
+    margin-top: 46px;
     padding-top: 14px;
     border-top: 1px solid rgba(245, 244, 235, 0.28);
     color: rgba(253, 251, 247, 0.7);
-    font-size: 10px;
+    font-size: 12px;
     font-weight: 800;
     letter-spacing: 0.16em;
     text-transform: uppercase;
@@ -452,7 +453,7 @@
     min-height: 49px;
     padding: 7px 8px 7px 18px;
     border-radius: 999px;
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 800;
     letter-spacing: 0.1em;
     line-height: 1;
@@ -502,6 +503,10 @@
     color: var(--paper);
     background: var(--forest);
 }
+.hero .btn-ghost {
+    color: var(--paper);
+    border-color: rgba(245, 244, 235, 0.5);
+}
 .btn-light {
     color: var(--forest);
     background: var(--paper);
@@ -522,13 +527,13 @@
 }
 .section-intro {
     display: grid;
-    grid-template-columns: 0.62fr 1.38fr;
+    grid-template-columns: 0.8fr 1.2fr;
     gap: 80px;
     align-items: start;
 }
 .section-intro h2 {
     max-width: 570px;
-    font-size: clamp(2.9rem, 5.8vw, 6.5rem);
+    font-size: clamp(2.75rem, 4.8vw, 5rem);
 }
 .section-intro .intro-copy {
     max-width: 515px;
@@ -542,7 +547,7 @@
     align-items: center;
     gap: 14px;
     color: var(--sage);
-    font-size: 10px;
+    font-size: 12px;
     font-weight: 800;
     letter-spacing: 0.18em;
     text-transform: uppercase;
@@ -674,13 +679,13 @@
 .principle h3 {
     margin: 36px 0 10px;
     color: var(--paper);
-    font-size: 14px;
+    font-size: 16px;
     letter-spacing: 0.03em;
 }
 .principle p {
     margin: 0;
     color: rgba(253, 251, 247, 0.67);
-    font-size: 12px;
+    font-size: 14px;
     line-height: 1.75;
 }
 
@@ -751,7 +756,7 @@
     gap: 18px;
     margin-top: 15px;
     color: var(--sage);
-    font-size: 10px;
+    font-size: 12px;
     font-weight: 800;
     letter-spacing: 0.16em;
     text-transform: uppercase;
@@ -785,7 +790,7 @@
     min-height: 75dvh;
     display: flex;
     align-items: flex-end;
-    padding: 160px 0 70px;
+    padding: 140px 0 60px;
     color: var(--paper);
     background: var(--forest-deep);
     isolation: isolate;
@@ -830,7 +835,7 @@
 .page-hero h1 {
     max-width: 780px;
     margin-top: 20px;
-    font-size: clamp(4rem, 10vw, 9.5rem);
+    font-size: clamp(3.8rem, 7.8vw, 8rem);
 }
 .page-hero p {
     max-width: 545px;
@@ -841,12 +846,12 @@
 }
 .page-hero .hero-meta {
     max-width: 780px;
-    margin-top: 70px;
+    margin-top: 44px;
 }
 
 .split-section {
     display: grid;
-    grid-template-columns: 0.58fr 1.42fr;
+    grid-template-columns: 0.72fr 1.28fr;
     gap: 90px;
     align-items: start;
 }
@@ -903,7 +908,7 @@
     border-radius: 999px;
     color: var(--forest);
     background: rgba(255, 255, 255, 0.32);
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 800;
     letter-spacing: 0.06em;
 }
@@ -940,7 +945,7 @@
 }
 .leadership-card .role {
     color: var(--sage);
-    font-size: 10px;
+    font-size: 12px;
     font-weight: 800;
     letter-spacing: 0.14em;
     text-transform: uppercase;
@@ -948,7 +953,7 @@
 .leadership-card p {
     margin: 24px 0 0;
     color: var(--muted);
-    font-size: 13px;
+    font-size: 14px;
     line-height: 1.8;
 }
 .data-table {
@@ -963,14 +968,14 @@
     padding: 17px 0;
     text-align: left;
     vertical-align: top;
-    font-size: 12px;
+    font-size: 14px;
     line-height: 1.65;
 }
 .data-table th {
     width: 38%;
     padding-right: 24px;
     color: var(--sage);
-    font-size: 10px;
+    font-size: 12px;
     font-weight: 800;
     letter-spacing: 0.14em;
     text-transform: uppercase;
@@ -1007,7 +1012,7 @@
 .service-detail .detail-copy p {
     margin: 0 0 19px;
     color: var(--muted);
-    font-size: 13px;
+    font-size: 14px;
     line-height: 1.75;
 }
 .detail-deliverables {
@@ -1019,7 +1024,7 @@
     padding: 7px 9px;
     color: var(--forest);
     background: var(--sage-pale);
-    font-size: 10px;
+    font-size: 12px;
     font-weight: 800;
     line-height: 1.3;
 }
@@ -1094,7 +1099,7 @@
 }
 .project-meta dt {
     color: var(--sage);
-    font-size: 9px;
+    font-size: 12px;
     font-weight: 800;
     letter-spacing: 0.16em;
     text-transform: uppercase;
@@ -1108,7 +1113,7 @@
 .scope-title {
     margin: 32px 0 12px;
     color: var(--forest);
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 800;
     letter-spacing: 0.17em;
     text-transform: uppercase;
@@ -1125,7 +1130,7 @@
     position: relative;
     padding-left: 16px;
     color: var(--muted);
-    font-size: 12px;
+    font-size: 14px;
     line-height: 1.55;
 }
 .scope-list li::before {
@@ -1140,7 +1145,7 @@
 .reference {
     margin-top: 28px;
     color: var(--sage);
-    font-size: 11px;
+    font-size: 12px;
     line-height: 1.65;
 }
 
@@ -1170,12 +1175,12 @@
 .delivery-step h3 {
     margin: 30px 0 9px;
     color: var(--forest);
-    font-size: 14px;
+    font-size: 16px;
 }
 .delivery-step p {
     margin: 0;
     color: var(--muted);
-    font-size: 12px;
+    font-size: 14px;
     line-height: 1.7;
 }
 
@@ -1214,7 +1219,7 @@
 .contact-block h3 {
     margin: 0 0 9px;
     color: var(--sage);
-    font-size: 10px;
+    font-size: 12px;
     font-weight: 800;
     letter-spacing: 0.17em;
     text-transform: uppercase;
@@ -1254,7 +1259,7 @@
 .contact-form > p {
     margin: 16px 0 27px;
     color: var(--muted);
-    font-size: 13px;
+    font-size: 14px;
     line-height: 1.7;
 }
 .form-grid {
@@ -1272,7 +1277,7 @@
 }
 .field label {
     color: var(--sage);
-    font-size: 10px;
+    font-size: 12px;
     font-weight: 800;
     letter-spacing: 0.14em;
     text-transform: uppercase;
@@ -1287,7 +1292,7 @@
     outline: none;
     color: var(--ink);
     background: rgba(255, 255, 255, 0.56);
-    font-size: 13px;
+    font-size: 14px;
     transition:
         border-color 180ms var(--ease-out),
         box-shadow 180ms var(--ease-out);
@@ -1348,7 +1353,7 @@
     display: flex;
     gap: 22px;
     color: rgba(253, 251, 247, 0.65);
-    font-size: 10px;
+    font-size: 12px;
     font-weight: 800;
     letter-spacing: 0.13em;
     text-transform: uppercase;
@@ -1365,7 +1370,7 @@
     gap: 20px;
     padding-top: 19px;
     color: rgba(253, 251, 247, 0.48);
-    font-size: 10px;
+    font-size: 12px;
     letter-spacing: 0.07em;
 }
 
@@ -1633,7 +1638,7 @@
     justify-content: space-between;
     gap: 12px;
     color: var(--sage-pale);
-    font-size: 9px;
+    font-size: 12px;
     font-weight: 800;
     letter-spacing: 0.16em;
     text-transform: uppercase;
@@ -1649,7 +1654,7 @@
 .hero-evidence p {
     margin: 0;
     color: rgba(253, 251, 247, 0.72);
-    font-size: 11px;
+    font-size: 13px;
     line-height: 1.6;
 }
 .hero-evidence .evidence-rule {
@@ -1658,7 +1663,7 @@
     gap: 8px;
     margin-top: 22px;
     color: var(--clay);
-    font-size: 9px;
+    font-size: 12px;
     font-weight: 800;
     letter-spacing: 0.13em;
     text-transform: uppercase;
@@ -1720,7 +1725,7 @@
 }
 .path-label {
     color: var(--forest);
-    font-size: 10px;
+    font-size: 12px;
     font-weight: 800;
     letter-spacing: 0.1em;
     line-height: 1.35;
@@ -2012,7 +2017,7 @@
 .camera-coordinate {
     position: absolute;
     color: rgba(245, 244, 235, 0.6);
-    font-size: 9px;
+    font-size: 11px;
     font-weight: 800;
     letter-spacing: 0.18em;
     text-transform: uppercase;
@@ -2264,7 +2269,7 @@
 }
 .brand-type small {
     color: var(--sage);
-    font-size: 8px;
+    font-size: 10px;
     font-weight: 800;
     letter-spacing: 0.14em;
     text-transform: uppercase;
@@ -2289,12 +2294,12 @@
 .feature-proof span {
     max-width: 480px;
     color: var(--muted);
-    font-size: 12px;
+    font-size: 14px;
     line-height: 1.65;
 }
 .field-error {
     color: #a43d31;
-    font-size: 11px;
+    font-size: 12px;
     line-height: 1.4;
 }
 .field input[aria-invalid='true'],
