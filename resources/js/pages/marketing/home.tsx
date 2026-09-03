@@ -5,7 +5,6 @@ import {
     MarketingHead,
     MarketingLink,
     Pathline,
-    RouteRule,
     SectionHeading,
 } from '@/components/marketing/site';
 
@@ -99,16 +98,8 @@ export default function Home() {
                                 Get in touch
                             </ActionButton>
                         </div>
-                        <div className="hero-meta reveal delay-4">
-                            <span>Sustainably driven</span>
-                            <span>Rwanda · East Africa</span>
-                        </div>
                     </div>
                     <div className="hero-evidence reveal delay-2">
-                        <div className="evidence-top">
-                            <span>Field note / 00</span>
-                            <span>03 inputs</span>
-                        </div>
                         <div className="evidence-value">
                             Evidence
                             <br />
@@ -118,9 +109,6 @@ export default function Home() {
                             Grounded fieldwork, primary data, stakeholder
                             insight, and delivery discipline.
                         </p>
-                        <div className="evidence-rule">
-                            Context before counsel
-                        </div>
                     </div>
                 </div>
             </section>
@@ -145,8 +133,8 @@ export default function Home() {
                             Our work sits at the intersection of{' '}
                             <strong>
                                 environment, agribusiness, and rural livelihoods
-                            </strong>{' '}
-                            — combining rigorous analysis with field-informed
+                            </strong>
+                            , combining rigorous analysis with field-informed
                             insight.
                         </p>
                     </SectionHeading>
@@ -169,12 +157,6 @@ export default function Home() {
                                     <div className="service-no">{number}</div>
                                     <h3>{title}</h3>
                                     <p>{description}</p>
-                                    <div
-                                        className="service-arrow"
-                                        aria-hidden="true"
-                                    >
-                                        ↗
-                                    </div>
                                 </MarketingLink>
                             ),
                         )}
@@ -195,15 +177,15 @@ export default function Home() {
                         label="02 / How we work"
                         title={
                             <>
-                                Sustainability that moves from <em>ambition</em>{' '}
-                                to action.
+                                Sustainability that goes from <em>principle</em>{' '}
+                                to practice.
                             </>
                         }
                         light
                     >
                         <p>
                             At Next Ways, sustainability is not simply a
-                            principle — it shapes how we approach every
+                            principle; it shapes how we approach every
                             engagement.
                         </p>
                         <p style={{ marginTop: 22 }}>
@@ -238,7 +220,6 @@ export default function Home() {
                 <div className="container">
                     <div className="feature-layout">
                         <div>
-                            <RouteRule>03 / Featured expertise</RouteRule>
                             <h2 className="display reveal delay-1">
                                 Advice that can survive contact with the{' '}
                                 <em>field.</em>
@@ -285,10 +266,6 @@ export default function Home() {
                                     </picture>
                                 </div>
                             </div>
-                            <div className="feature-note">
-                                <span>Field note / 03</span>
-                                <span>Local context matters</span>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -297,7 +274,6 @@ export default function Home() {
             <section className="cta-band">
                 <div className="cta-inner reveal container">
                     <div>
-                        <div className="eyebrow">04 / The next move</div>
                         <h2 className="display">
                             Building more sustainable agri-food systems and
                             communities.

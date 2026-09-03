@@ -130,10 +130,6 @@ export default function Services() {
                 description="Advisory services designed to help clients understand complex environmental and agri-food challenges, assess investment opportunities, and develop practical interventions."
                 aside={
                     <div className="hero-evidence">
-                        <div className="evidence-top">
-                            <span>Service note / 07</span>
-                            <span>Capability</span>
-                        </div>
                         <div className="evidence-value">
                             7 areas
                             <br />
@@ -143,9 +139,6 @@ export default function Services() {
                             From environmental review and value chains to
                             digital agriculture and rural logistics.
                         </p>
-                        <div className="evidence-rule">
-                            One practice, many routes
-                        </div>
                     </div>
                 }
             />
@@ -167,7 +160,7 @@ export default function Services() {
                         </p>
                         <p style={{ marginTop: 22 }}>
                             We work with the details that make an intervention
-                            viable — technical choices, local institutions,
+                            viable: technical choices, local institutions,
                             operating models, budgets, logistics, and the people
                             who will carry it forward.
                         </p>
@@ -216,7 +209,6 @@ export default function Services() {
             <section className="section forest-panel">
                 <div className="container">
                     <SectionHeading
-                        label="02 / The right fit"
                         title={
                             <>
                                 A tailored brief, not a <em>template.</em>
@@ -226,8 +218,8 @@ export default function Services() {
                     >
                         <p>
                             Tell us about the challenge, programme, investment,
-                            or value chain you are working on. We’ll help shape
-                            the right advisory engagement around the decisions
+                            or value chain you are working on. We’ll shape the
+                            right advisory engagement around the decisions
                             ahead.
                         </p>
                     </SectionHeading>

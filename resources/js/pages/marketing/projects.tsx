@@ -4,7 +4,6 @@ import {
     CameraDepthScene,
     MarketingHead,
     Pathline,
-    RouteRule,
     SectionHeading,
 } from '@/components/marketing/site';
 
@@ -62,9 +61,6 @@ export default function Projects() {
             <section className="page-hero projects" data-camera-section>
                 <CameraDepthScene kind="projects" />
                 <div className="page-hero-inner">
-                    <div className="eyebrow reveal">
-                        Selected project portfolio
-                    </div>
                     <h1 className="display reveal delay-1">
                         Proof in the <em>work.</em>
                     </h1>
@@ -74,10 +70,6 @@ export default function Projects() {
                         assessment, digital coordination, and investment
                         planning.
                     </p>
-                    <div className="hero-meta reveal delay-3">
-                        <span>Next Ways Ltd</span>
-                        <span>Portfolio / 2024—2025</span>
-                    </div>
                 </div>
             </section>
 
@@ -109,13 +101,11 @@ export default function Projects() {
                                         />
                                     </picture>
                                 </div>
-                                <div className="feature-note">
-                                    <span>Case 01</span>
-                                    <span>Horticulture · Nyanza</span>
-                                </div>
                             </div>
                             <div className="project-copy reveal delay-1">
-                                <RouteRule>May 2025 — September 2025</RouteRule>
+                                <div className="scope-title">
+                                    May 2025 to September 2025
+                                </div>
                                 <h2>
                                     Value chain &amp; cold-chain feasibility
                                     assessment for horticultural produce
@@ -159,7 +149,7 @@ export default function Projects() {
                                 <div className="reference">
                                     Delivered on time and on budget; received a
                                     satisfactory performance rating. Reference:
-                                    Darius Niyomugabo, Managing Director —
+                                    Darius Niyomugabo, Managing Director,
                                     OTIS/CONS/2025/009.
                                 </div>
                             </div>
@@ -178,12 +168,6 @@ export default function Projects() {
                                             'linear-gradient(135deg, var(--forest), var(--sage))',
                                     }}
                                 >
-                                    <div
-                                        className="eyebrow"
-                                        style={{ color: 'var(--sage-pale)' }}
-                                    >
-                                        Case 02 / Grain systems
-                                    </div>
                                     <div
                                         style={{
                                             color: 'var(--paper)',
@@ -219,9 +203,9 @@ export default function Projects() {
                                 </div>
                             </div>
                             <div className="project-copy reveal delay-2">
-                                <RouteRule>
-                                    August 2024 — December 2024
-                                </RouteRule>
+                                <div className="scope-title">
+                                    August 2024 to December 2024
+                                </div>
                                 <h2>
                                     Feasibility study for a digitally-enabled
                                     grain aggregation &amp; post-harvest loss
@@ -238,9 +222,9 @@ export default function Projects() {
                                     <div>
                                         <dt>Client</dt>
                                         <dd>
-                                            TESC Ltd — Top Environmental,
+                                            TESC Ltd (Top Environmental,
                                             Engineering &amp; Social
-                                            Consultancies
+                                            Consultancies)
                                         </dd>
                                     </div>
                                     <div>
@@ -270,7 +254,7 @@ export default function Projects() {
                                 <div className="reference">
                                     The completed work was recommended without
                                     reservation. Reference: Dr Ndikubwimana
-                                    Innocent, Executive Director, TESC Ltd —
+                                    Innocent, Executive Director, TESC Ltd,
                                     TESC/CONS/2024/017.
                                 </div>
                             </div>
@@ -313,9 +297,6 @@ export default function Projects() {
             <section className="cta-band">
                 <div className="cta-inner reveal container">
                     <div>
-                        <div className="eyebrow">
-                            03 / Why clients choose us
-                        </div>
                         <h2 className="display">
                             Rigorous enough for the brief. Grounded enough for
                             the field.
