@@ -445,7 +445,7 @@ function Header() {
                         ))}
                     </nav>
                     <MarketingLink className="nav-cta" to="contact">
-                        Talk to us <span aria-hidden="true">↗</span>
+                        Talk to us
                     </MarketingLink>
                     <button
                         ref={menuToggleRef}
@@ -538,14 +538,12 @@ export function PageHero({
     label,
     title,
     description,
-    meta = 'Rwanda · East Africa',
     aside,
 }: {
     kind: string;
     label: string;
     title: ReactNode;
     description: string;
-    meta?: string;
     aside?: ReactNode;
 }) {
     return (
@@ -556,10 +554,6 @@ export function PageHero({
                     <div className="eyebrow reveal">{label}</div>
                     <h1 className="display reveal delay-1">{title}</h1>
                     <p className="reveal delay-2">{description}</p>
-                    <div className="hero-meta reveal delay-3">
-                        <span>Next Ways Ltd</span>
-                        <span>{meta}</span>
-                    </div>
                 </div>
                 {aside ? (
                     <div className="page-hero-aside reveal delay-2">
@@ -592,7 +586,7 @@ export function SectionHeading({
     children,
     light = false,
 }: {
-    label: string;
+    label?: string;
     title: ReactNode;
     children?: ReactNode;
     light?: boolean;
@@ -600,7 +594,7 @@ export function SectionHeading({
     return (
         <div className={`section-intro${light ? ' light' : ''}`}>
             <div>
-                <div className="eyebrow reveal">{label}</div>
+                {label ? <div className="eyebrow reveal">{label}</div> : null}
                 <h2 className="display reveal delay-1">{title}</h2>
             </div>
             {children ? (
@@ -612,14 +606,6 @@ export function SectionHeading({
             )}
         </div>
     );
-}
-
-export function RouteRule({
-    children = 'Field note',
-}: {
-    children?: ReactNode;
-}) {
-    return <div className="route-rule reveal">{children}</div>;
 }
 
 export function ActionButton({
@@ -634,7 +620,6 @@ export function ActionButton({
     return (
         <MarketingLink className={`btn btn-${variant}`} to={to}>
             {children}
-            <span aria-hidden="true">↗</span>
         </MarketingLink>
     );
 }

@@ -31,8 +31,7 @@ export default function Contact() {
                 kind="contact contact-hero"
                 label="Get in touch"
                 title="Let’s discuss your next project."
-                description="If your organization is planning an environmental, agribusiness, value-chain, post-harvest, cold-chain, feasibility, evaluation, digital-agriculture, or rural-logistics initiative, talk to Next Ways about how we can support your decision-making."
-                meta="Kigali · Rwanda"
+                description="Tell us about your organization and the advisory support you need."
             />
 
             <section className="section">
@@ -66,7 +65,7 @@ export default function Contact() {
                                         <br />
                                         KN 78 St, Kiyovu
                                         <br />
-                                        Nyarugenge, Kigali — Rwanda
+                                        Nyarugenge, Kigali, Rwanda
                                     </p>
                                 </div>
                                 <div className="contact-block reveal delay-1">
@@ -382,12 +381,7 @@ export default function Contact() {
                                             >
                                                 {processing
                                                     ? 'Sending…'
-                                                    : 'Send inquiry'}{' '}
-                                                {!processing && (
-                                                    <span aria-hidden="true">
-                                                        ↗
-                                                    </span>
-                                                )}
+                                                    : 'Send inquiry'}
                                             </button>
                                         </div>
                                     </>
@@ -401,12 +395,8 @@ export default function Contact() {
             <section className="cta-band">
                 <div className="cta-inner reveal container">
                     <div>
-                        <div className="eyebrow">
-                            02 / The Next Ways promise
-                        </div>
                         <h2 className="display">
-                            Sustainably driven. Evidence-led.
-                            Implementation-focused.
+                            Grounded in the field. Ready for the decision.
                         </h2>
                     </div>
                     <ActionButton to="services" variant="light">

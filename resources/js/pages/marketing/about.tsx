@@ -4,7 +4,6 @@ import {
     MarketingHead,
     PageHero,
     Pathline,
-    RouteRule,
     SectionHeading,
 } from '@/components/marketing/site';
 
@@ -16,7 +15,7 @@ const companyRows = [
     ['Managing Director / CEO', 'Basile SEBURIKOKO'],
     [
         'Head office',
-        'Norrsken House Kigali, KN 78 St, Kiyovu, Nyarugenge — Kigali',
+        'Norrsken House Kigali, KN 78 St, Kiyovu, Nyarugenge, Kigali',
     ],
     ['Registered office', 'KN1 Road 30, Muhima, Nyarugenge, Kigali'],
     ['Main activity', 'Environmental Consulting (SM749010)'],
@@ -50,18 +49,11 @@ export default function About() {
                 description="Next Ways Ltd is a Rwandan advisory firm delivering evidence-based consulting at the intersection of environment, agribusiness, and rural livelihoods."
                 aside={
                     <div className="hero-evidence">
-                        <div className="evidence-top">
-                            <span>Company note / 01</span>
-                            <span>Since</span>
-                        </div>
                         <div className="evidence-value">2023</div>
                         <p>
                             Registered in Rwanda. Headquartered at Norrsken
                             House Kigali.
                         </p>
-                        <div className="evidence-rule">
-                            Built for local context
-                        </div>
                     </div>
                 }
             />
@@ -70,7 +62,6 @@ export default function About() {
                 <div className="container">
                     <div className="split-section">
                         <div>
-                            <RouteRule>01 / Our position</RouteRule>
                             <h2 className="display reveal delay-1">
                                 Sustainably <em>driven.</em>
                             </h2>
@@ -95,8 +86,8 @@ export default function About() {
                                 environment.
                             </p>
                             <div className="callout-line">
-                                Good advice begins by seeing the system as it is
-                                — before imagining what it could become.
+                                Good advice begins by seeing the system as it
+                                is, before imagining what it could become.
                             </div>
                         </div>
                     </div>
@@ -105,12 +96,7 @@ export default function About() {
 
             <section className="section statement-band">
                 <div className="statement-wrap container">
-                    <div>
-                        <div className="eyebrow reveal">02 / Direction</div>
-                        <div className="route-rule reveal delay-1">
-                            Vision &amp; mission
-                        </div>
-                    </div>
+                    <div />
                     <div className="statement-copy">
                         <h2 className="serif-quote reveal delay-1">
                             To be East Africa’s trusted partner for sustainable,
@@ -171,7 +157,6 @@ export default function About() {
             >
                 <div className="leadership container">
                     <div>
-                        <RouteRule>04 / Leadership</RouteRule>
                         <h2 className="display reveal delay-1">
                             One practice. <em>Close to the work.</em>
                         </h2>
@@ -205,10 +190,7 @@ export default function About() {
 
             <section className="section">
                 <div className="container">
-                    <SectionHeading
-                        label="05 / Company overview"
-                        title="The details matter."
-                    >
+                    <SectionHeading title="The details matter.">
                         <p>
                             A clear operating base for work that needs to be
                             both locally relevant and professionally
@@ -233,9 +215,6 @@ export default function About() {
             <section className="cta-band">
                 <div className="cta-inner reveal container">
                     <div>
-                        <div className="eyebrow">
-                            06 / Continue the conversation
-                        </div>
                         <h2 className="display">
                             Bring us the question behind the project.
                         </h2>
