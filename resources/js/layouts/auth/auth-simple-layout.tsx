@@ -18,7 +18,7 @@ export default function AuthSimpleLayout({
                             className="flex flex-col items-center gap-2 font-medium"
                         >
                             <div className="mb-1 flex items-center gap-2.5">
-                                <AppLogoIcon className="size-9 text-[#2d6655]" />
+                                <AppLogoIcon className="size-9 text-[#2d6655] dark:text-[#b7cbbf]" />
                                 <span className="font-serif text-xl tracking-tight text-[#214d40] dark:text-[#d8e4dc]">
                                     Next Ways
                                 </span>

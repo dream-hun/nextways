@@ -95,7 +95,7 @@ function TwoFactorSetupStep({
                         </div>
                     </div>
 
-                    <div className="flex w-full space-x-5">
+                    <div className="flex w-full gap-5">
                         <Button className="w-full" onClick={onNextStep}>
                             {buttonText}
                         </Button>
@@ -108,7 +108,7 @@ function TwoFactorSetupStep({
                         </span>
                     </div>
 
-                    <div className="flex w-full space-x-2">
+                    <div className="flex w-full gap-2">
                         <div className="border-border flex w-full items-stretch overflow-hidden rounded-xl border">
                             {!manualSetupKey ? (
                                 <div className="bg-muted flex h-full w-full items-center justify-center p-3">
@@ -173,7 +173,7 @@ function TwoFactorVerificationStep({
                         ref={pinInputContainerRef}
                         className="relative w-full space-y-3"
                     >
-                        <div className="flex w-full flex-col items-center space-y-3 py-2">
+                        <div className="flex w-full flex-col items-center gap-3 py-2">
                             <InputOTP
                                 id="otp"
                                 name="code"
@@ -202,7 +202,7 @@ function TwoFactorVerificationStep({
                             />
                         </div>
 
-                        <div className="flex w-full space-x-5">
+                        <div className="flex w-full gap-5">
                             <Button
                                 type="button"
                                 variant="outline"
@@ -333,7 +333,7 @@ export default function TwoFactorSetupModal({
                     </DialogDescription>
                 </DialogHeader>
 
-                <div className="flex flex-col items-center space-y-5">
+                <div className="flex flex-col items-center gap-5">
                     {showVerificationStep ? (
                         <TwoFactorVerificationStep
                             onClose={handleClose}

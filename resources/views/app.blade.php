@@ -30,14 +30,11 @@
             }
         </style>
 
-        <link rel="icon" href="/favicon.ico" sizes="any">
-        <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-        <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+        <link rel="icon" href="/favicon.ico?v=nextways-20260903" sizes="16x16 32x32 48x48" type="image/x-icon">
+        <link rel="icon" href="/logo-Photoroom-icon.png?v=nextways-20260903" sizes="512x512" type="image/png">
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=nextways-20260903" sizes="180x180">
 
         @fonts
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet">
 
         @viteReactRefresh
         @vite(['resources/css/app.css', 'resources/js/app.tsx', "resources/js/pages/{$page['component']}.tsx"])

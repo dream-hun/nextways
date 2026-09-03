@@ -1,14 +1,16 @@
 /* Field Notes / Editorial Practice: warm paper, forest anchor, editorial splits, field-note labels, restrained motion. */
-import { Head, Link, usePage } from '@inertiajs/react';
-import { ReactLenis, useLenis } from 'lenis/react';
+import { Head, Link, usePage } from "@inertiajs/react";
+import { ReactLenis, useLenis } from "lenis/react";
 import {
     useCallback,
     useEffect,
     useRef,
     useState,
     type ReactNode,
-} from 'react';
-import { about, contact, home, projects, services } from '@/routes';
+} from "react";
+import BrandLogo, { BRAND_LOGO_PATH } from "@/components/brand-logo";
+import Footer from "@/components/marketing/footer";
+import { about, contact, home, projects, services } from "@/routes";
 import {
     formatCameraTransform,
     getCameraOffset,
@@ -17,18 +19,18 @@ import {
     REVEAL_OBSERVER_OPTIONS,
     REVEAL_SELECTOR,
     shouldEnableMotion,
-} from '@/lib/marketing-motion';
-import type { RouteDefinition } from '@/wayfinder';
-import 'lenis/dist/lenis.css';
+} from "@/lib/marketing-motion";
+import type { RouteDefinition } from "@/wayfinder";
+import "lenis/dist/lenis.css";
 
 type MarketingRouteName =
-    | 'home'
-    | 'about'
-    | 'services'
-    | 'projects'
-    | 'contact';
+    | "home"
+    | "about"
+    | "services"
+    | "projects"
+    | "contact";
 
-const routes: Record<MarketingRouteName, () => RouteDefinition<'get'>> = {
+const routes: Record<MarketingRouteName, () => RouteDefinition<"get">> = {
     home,
     about,
     services,
@@ -37,15 +39,15 @@ const routes: Record<MarketingRouteName, () => RouteDefinition<'get'>> = {
 };
 
 const navItems: { label: string; route: MarketingRouteName }[] = [
-    { label: 'About', route: 'about' },
-    { label: 'Services', route: 'services' },
-    { label: 'Projects', route: 'projects' },
+    { label: "About", route: "about" },
+    { label: "Services", route: "services" },
+    { label: "Projects", route: "projects" },
 ];
 
 export function MarketingHead({
     title,
     description,
-    image = '/images/nextways-fieldwork.png',
+    image = "/images/nextways-fieldwork.png",
     organization = false,
 }: {
     title: string;
@@ -57,22 +59,24 @@ export function MarketingHead({
     const { appUrl } = page.props;
     const canonical = new URL(page.url, appUrl).toString();
     const socialImage = new URL(image, appUrl).toString();
+    const logoImage = new URL(BRAND_LOGO_PATH, appUrl).toString();
     const fullTitle = `${title} - Next Ways Ltd`;
     const organizationData = {
-        '@context': 'https://schema.org',
-        '@type': 'ProfessionalService',
-        name: 'Next Ways Ltd',
+        "@context": "https://schema.org",
+        "@type": "ProfessionalService",
+        name: "Next Ways Ltd",
         url: appUrl,
         image: socialImage,
-        email: 'sebasile@yahoo.fr',
-        telephone: '+250788867106',
+        logo: logoImage,
+        email: "sebasile@yahoo.fr",
+        telephone: "+250788867106",
         address: {
-            '@type': 'PostalAddress',
-            streetAddress: 'Norrsken House Kigali, KN 78 St, Kiyovu',
-            addressLocality: 'Kigali',
-            addressCountry: 'RW',
+            "@type": "PostalAddress",
+            streetAddress: "Norrsken House Kigali, KN 78 St, Kiyovu",
+            addressLocality: "Kigali",
+            addressCountry: "RW",
         },
-        areaServed: ['Rwanda', 'East Africa'],
+        areaServed: ["Rwanda", "East Africa"],
     };
 
     return (
@@ -124,24 +128,8 @@ export function MarketingHead({
 
 function Brand({ inverse = false }: { inverse?: boolean }) {
     return (
-        <span className={`brand-lockup${inverse ? ' inverse' : ''}`}>
-            <svg className="brand-mark" viewBox="0 0 40 40" aria-hidden="true">
-                <circle cx="20" cy="20" r="18.5" fill="currentColor" />
-                <path
-                    d="M10.5 26.5c4.4-1.1 6.6-5.4 8.3-9.2 1.7-3.9 4-6.8 10.7-7.8M19 17.2c3.1.2 6.1 2.4 8.6 6.7"
-                    fill="none"
-                    stroke="var(--paper)"
-                    strokeLinecap="round"
-                    strokeWidth="2"
-                />
-                <circle cx="10.5" cy="26.5" r="2" fill="var(--clay)" />
-                <circle cx="29.5" cy="9.5" r="2" fill="var(--sage-pale)" />
-                <circle cx="27.6" cy="23.9" r="2" fill="var(--paper)" />
-            </svg>
-            <span className="brand-type">
-                <strong>Next Ways</strong>
-                <small>Sustainably driven</small>
-            </span>
+        <span className={`brand-lockup${inverse ? " inverse" : ""}`}>
+            <BrandLogo className="brand-logo-image" alt="" />
         </span>
     );
 }
@@ -175,21 +163,21 @@ function RouteMotion({ children }: { children: ReactNode }) {
     const lenis = useLenis();
 
     useEffect(() => {
-        const shell = document.querySelector<HTMLElement>('.marketing-shell');
+        const shell = document.querySelector<HTMLElement>(".marketing-shell");
         const targets = Array.from(
             shell?.querySelectorAll<HTMLElement>(REVEAL_SELECTOR) ?? [],
         );
 
         targets
-            .filter((node) => node.matches('.image-shell'))
-            .forEach((node) => node.classList.add('reveal-image'));
+            .filter((node) => node.matches(".image-shell"))
+            .forEach((node) => node.classList.add("reveal-image"));
 
         if (
             !shouldEnableMotion(
-                window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+                window.matchMedia("(prefers-reduced-motion: reduce)").matches,
             )
         ) {
-            targets.forEach((node) => node.classList.add('is-visible'));
+            targets.forEach((node) => node.classList.add("is-visible"));
 
             return;
         }
@@ -200,19 +188,19 @@ function RouteMotion({ children }: { children: ReactNode }) {
                     node.getBoundingClientRect().top <
                     window.innerHeight * 0.94,
             )
-            .forEach((node) => node.classList.add('is-visible'));
+            .forEach((node) => node.classList.add("is-visible"));
 
         const observer = new IntersectionObserver((entries) => {
             entries.forEach((entry) => {
                 if (entry.isIntersecting) {
-                    entry.target.classList.add('is-visible');
+                    entry.target.classList.add("is-visible");
                     observer.unobserve(entry.target);
                 }
             });
         }, REVEAL_OBSERVER_OPTIONS);
 
         targets
-            .filter((node) => !node.classList.contains('is-visible'))
+            .filter((node) => !node.classList.contains("is-visible"))
             .forEach((node) => observer.observe(node));
         return () => {
             observer.disconnect();
@@ -240,7 +228,7 @@ function RouteMotion({ children }: { children: ReactNode }) {
 
 export function CameraParallax({
     children,
-    className = '',
+    className = "",
     depth,
 }: {
     children: ReactNode;
@@ -279,16 +267,16 @@ export function CameraParallax({
             return;
         }
 
-        const section = layer.closest<HTMLElement>('[data-camera-section]');
+        const section = layer.closest<HTMLElement>("[data-camera-section]");
         const reducedMotion = window.matchMedia(
-            '(prefers-reduced-motion: reduce)',
+            "(prefers-reduced-motion: reduce)",
         );
 
         const measure = () => {
             reducedMotionRef.current = reducedMotion.matches;
 
             if (reducedMotion.matches) {
-                layer.style.removeProperty('transform');
+                layer.style.removeProperty("transform");
 
                 return;
             }
@@ -300,12 +288,12 @@ export function CameraParallax({
         };
 
         measure();
-        window.addEventListener('resize', measure);
-        reducedMotion.addEventListener('change', measure);
+        window.addEventListener("resize", measure);
+        reducedMotion.addEventListener("change", measure);
 
         return () => {
-            window.removeEventListener('resize', measure);
-            reducedMotion.removeEventListener('change', measure);
+            window.removeEventListener("resize", measure);
+            reducedMotion.removeEventListener("change", measure);
         };
     }, [lenis, updateCamera]);
 
@@ -359,9 +347,9 @@ function Header() {
         const onScroll = () => setScrolled(window.scrollY > 18);
 
         onScroll();
-        window.addEventListener('scroll', onScroll, { passive: true });
+        window.addEventListener("scroll", onScroll, { passive: true });
 
-        return () => window.removeEventListener('scroll', onScroll);
+        return () => window.removeEventListener("scroll", onScroll);
     }, []);
 
     useEffect(() => {
@@ -371,7 +359,7 @@ function Header() {
     useEffect(() => {
         const previousOverflow = document.body.style.overflow;
 
-        document.body.style.overflow = menuOpen ? 'hidden' : previousOverflow;
+        document.body.style.overflow = menuOpen ? "hidden" : previousOverflow;
 
         return () => {
             document.body.style.overflow = previousOverflow;
@@ -393,14 +381,14 @@ function Header() {
         focusable[0]?.focus();
 
         const handleKeyDown = (event: KeyboardEvent) => {
-            if (event.key === 'Escape') {
+            if (event.key === "Escape") {
                 setMenuOpen(false);
                 menuToggleRef.current?.focus();
 
                 return;
             }
 
-            if (event.key !== 'Tab' || focusable.length === 0) {
+            if (event.key !== "Tab" || focusable.length === 0) {
                 return;
             }
 
@@ -416,15 +404,15 @@ function Header() {
             }
         };
 
-        document.addEventListener('keydown', handleKeyDown);
+        document.addEventListener("keydown", handleKeyDown);
 
-        return () => document.removeEventListener('keydown', handleKeyDown);
+        return () => document.removeEventListener("keydown", handleKeyDown);
     }, [menuOpen]);
 
     return (
         <>
             <div className="site-nav-wrap">
-                <header className={`site-nav${scrolled ? ' scrolled' : ''}`}>
+                <header className={`site-nav${scrolled ? " scrolled" : ""}`}>
                     <MarketingLink className="nav-logo" to="home">
                         <span className="sr-only">Next Ways Ltd home</span>
                         <Brand />
@@ -435,7 +423,7 @@ function Header() {
                                 key={item.route}
                                 className={
                                     url === routes[item.route]().url
-                                        ? 'active'
+                                        ? "active"
                                         : undefined
                                 }
                                 to={item.route}
@@ -449,10 +437,10 @@ function Header() {
                     </MarketingLink>
                     <button
                         ref={menuToggleRef}
-                        className={`menu-toggle${menuOpen ? ' open' : ''}`}
+                        className={`menu-toggle${menuOpen ? " open" : ""}`}
                         type="button"
                         onClick={() => setMenuOpen((open) => !open)}
-                        aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+                        aria-label={menuOpen ? "Close menu" : "Open menu"}
                         aria-expanded={menuOpen}
                         aria-controls="mobile-navigation"
                     >
@@ -464,10 +452,10 @@ function Header() {
             <div
                 ref={menuRef}
                 id="mobile-navigation"
-                className={`mobile-menu${menuOpen ? ' open' : ''}`}
+                className={`mobile-menu${menuOpen ? " open" : ""}`}
                 aria-hidden={!menuOpen}
-                aria-modal={menuOpen ? 'true' : undefined}
-                role={menuOpen ? 'dialog' : undefined}
+                aria-modal={menuOpen ? "true" : undefined}
+                role={menuOpen ? "dialog" : undefined}
             >
                 <nav className="mobile-links" aria-label="Mobile navigation">
                     <MarketingLink to="home">Home</MarketingLink>
@@ -484,33 +472,6 @@ function Header() {
                 </div>
             </div>
         </>
-    );
-}
-
-function Footer() {
-    return (
-        <footer className="site-footer">
-            <div className="container">
-                <div className="footer-main">
-                    <MarketingLink className="footer-brand" to="home">
-                        <span className="sr-only">Next Ways Ltd home</span>
-                        <Brand inverse />
-                    </MarketingLink>
-                    <nav className="footer-nav" aria-label="Footer navigation">
-                        {navItems.map((item) => (
-                            <MarketingLink key={item.route} to={item.route}>
-                                {item.label}
-                            </MarketingLink>
-                        ))}
-                        <MarketingLink to="contact">Contact</MarketingLink>
-                    </nav>
-                </div>
-                <div className="footer-bottom">
-                    <span>© {new Date().getFullYear()} Next Ways Ltd</span>
-                    <span>Sustainably driven · Kigali, Rwanda</span>
-                </div>
-            </div>
-        </footer>
     );
 }
 
@@ -548,8 +509,8 @@ export function PageHero({
 }) {
     return (
         <section className={`page-hero ${kind}`} data-camera-section>
-            <CameraDepthScene kind={kind.split(' ')[0]} />
-            <div className={`page-hero-inner${aside ? ' has-aside' : ''}`}>
+            <CameraDepthScene kind={kind.split(" ")[0]} />
+            <div className={`page-hero-inner${aside ? " has-aside" : ""}`}>
                 <div className="page-hero-copy">
                     <div className="eyebrow reveal">{label}</div>
                     <h1 className="display reveal delay-1">{title}</h1>
@@ -571,7 +532,7 @@ export function Pathline({ steps }: { steps: string[] }) {
             {steps.map((step, index) => (
                 <li className="path-step" key={step}>
                     <span className="path-node">
-                        {String(index + 1).padStart(2, '0')}
+                        {String(index + 1).padStart(2, "0")}
                     </span>
                     <span className="path-label">{step}</span>
                 </li>
@@ -592,7 +553,7 @@ export function SectionHeading({
     light?: boolean;
 }) {
     return (
-        <div className={`section-intro${light ? ' light' : ''}`}>
+        <div className={`section-intro${light ? " light" : ""}`}>
             <div>
                 {label ? <div className="eyebrow reveal">{label}</div> : null}
                 <h2 className="display reveal delay-1">{title}</h2>
@@ -611,11 +572,11 @@ export function SectionHeading({
 export function ActionButton({
     to,
     children,
-    variant = 'primary',
+    variant = "primary",
 }: {
     to: MarketingRouteName;
     children: ReactNode;
-    variant?: 'primary' | 'ghost' | 'light';
+    variant?: "primary" | "ghost" | "light";
 }) {
     return (
         <MarketingLink className={`btn btn-${variant}`} to={to}>

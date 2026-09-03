@@ -19,25 +19,29 @@ describe('marketing style safeguards', () => {
         );
     });
 
-    it('gives standalone editorial headings a readable display size', () => {
+    it('uses the shared responsive heading scale for standalone headings', () => {
         const displayRule = stylesheet.match(
             /\.display\s*\{(?<declarations>[^}]*)\}/,
         );
 
         expect(displayRule?.groups?.declarations).toContain(
-            'font-size: clamp(2.75rem, 5vw, 5.5rem);',
+            'font-size: var(--heading-size);',
         );
     });
 
-    it('keeps the home hero copy and artwork inside the hero boundary', () => {
+    it('keeps home and inner-page artwork inside their hero boundaries', () => {
         const heroRule = stylesheet.match(
             /\.hero\s*\{(?<declarations>[^}]*)\}/,
+        );
+        const pageHeroRule = stylesheet.match(
+            /\.page-hero\s*\{(?<declarations>[^}]*)\}/,
         );
         const heroCopyRule = stylesheet.match(
             /\.hero-home \.hero-copy\s*\{(?<declarations>[^}]*)\}/,
         );
 
         expect(heroRule?.groups?.declarations).toContain('overflow: clip;');
+        expect(pageHeroRule?.groups?.declarations).toContain('overflow: clip;');
         expect(heroCopyRule?.groups?.declarations).toContain(
             'width: min(740px, 100%);',
         );
