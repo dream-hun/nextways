@@ -1,13 +1,11 @@
-/* Field Notes / Editorial Practice: warm paper field, Next Ways Forest anchor, DM Serif Display + Manrope, editorial splits, field-note labels, restrained transform/opacity motion. */
 import {
-    ActionButton,
+    MARKETING_HERO_IMAGES,
     MarketingHead,
     PageHero,
-    Pathline,
-    SectionHeading,
 } from '@/components/marketing/site';
 import { Form } from '@inertiajs/react';
 import { store } from '@/routes/contact';
+import { cn } from '@/lib/utils';
 
 const interests = [
     'Environmental Consulting',
@@ -26,384 +24,387 @@ export default function Contact() {
             <MarketingHead
                 title="Contact"
                 description="Contact Next Ways Ltd in Kigali about environmental, agribusiness, feasibility, evaluation, digital agriculture, or rural logistics advisory."
+                image={MARKETING_HERO_IMAGES.contact.fallbackSrc}
             />
             <PageHero
-                kind="contact contact-hero"
-                label="Get in touch"
-                title="Let’s discuss your next project."
+                image={MARKETING_HERO_IMAGES.contact}
+                title={
+                    <>
+                        Let’s discuss your{' '}
+                        <em className="text-sage font-normal not-italic">
+                            next project.
+                        </em>
+                    </>
+                }
                 description="Tell us about your organization and the advisory support you need."
             />
 
-            <section className="section">
-                <div className="container">
-                    <div className="contact-grid">
-                        <div className="contact-details">
-                            <SectionHeading
-                                label="01 / Contact details"
-                                title="Start with the brief."
-                            >
-                                <p>
-                                    Use the form to tell us about your
-                                    organization and the advisory support you
-                                    need. We’ll come back to the question behind
-                                    the project.
-                                </p>
-                            </SectionHeading>
-                            <Pathline
-                                steps={[
-                                    'Share the context',
-                                    'Frame the need',
-                                    'Shape the brief',
-                                    'Start the work',
-                                ]}
-                            />
-                            <div style={{ marginTop: 42 }}>
-                                <div className="contact-block reveal">
-                                    <h3>Head office</h3>
-                                    <p>
-                                        Norrsken House Kigali
-                                        <br />
-                                        KN 78 St, Kiyovu
-                                        <br />
-                                        Nyarugenge, Kigali, Rwanda
-                                    </p>
-                                </div>
-                                <div className="contact-block reveal delay-1">
-                                    <h3>Registered office</h3>
-                                    <p>
-                                        KN1 Road 30
-                                        <br />
-                                        Muhima, Nyarugenge
-                                        <br />
-                                        Kigali, Rwanda
-                                    </p>
-                                </div>
-                                <div className="contact-block reveal delay-2">
-                                    <h3>Phone</h3>
-                                    <p>
-                                        <a href="tel:+250788867106">
-                                            +250 788 867 106
-                                        </a>
-                                        <br />
-                                        <a href="tel:+250788304638">
-                                            +250 788 304 638
-                                        </a>
-                                    </p>
-                                </div>
-                                <div className="contact-block reveal delay-3">
-                                    <h3>Email</h3>
-                                    <p>
-                                        <a href="mailto:sebasile@yahoo.fr">
+            <section className="marketing-container pb-20 lg:pb-44">
+                <div className="mx-auto grid max-w-7xl grid-cols-1 gap-8 lg:grid-cols-[0.6fr_1fr] lg:gap-20">
+                    {/* DETAILS */}
+                    <div>
+                        <p className="text-sage mb-4 text-xs font-bold tracking-[0.2em] uppercase">
+                            Contact details
+                        </p>
+                        <h2 className="font-heading text-ink text-[1.8rem] leading-tight font-semibold tracking-[-0.02em] text-balance lg:text-[2.6rem]">
+                            Start with the brief.
+                        </h2>
+                        <div className="border-mkt-line mt-8 border-t">
+                            {[
+                                {
+                                    label: 'Head office',
+                                    value: (
+                                        <>
+                                            Norrsken House Kigali
+                                            <br />
+                                            KN 78 St, Kiyovu
+                                            <br />
+                                            Nyarugenge, Kigali, Rwanda
+                                        </>
+                                    ),
+                                },
+                                {
+                                    label: 'Registered office',
+                                    value: (
+                                        <>
+                                            KN1 Road 30
+                                            <br />
+                                            Muhima, Nyarugenge
+                                            <br />
+                                            Kigali, Rwanda
+                                        </>
+                                    ),
+                                },
+                                {
+                                    label: 'Phone',
+                                    value: (
+                                        <>
+                                            <a
+                                                href="tel:+250788867106"
+                                                className="text-forest hover:text-sage font-bold"
+                                            >
+                                                +250 788 867 106
+                                            </a>
+                                            <br />
+                                            <a
+                                                href="tel:+250788304638"
+                                                className="text-forest hover:text-sage font-bold"
+                                            >
+                                                +250 788 304 638
+                                            </a>
+                                        </>
+                                    ),
+                                },
+                                {
+                                    label: 'Email',
+                                    value: (
+                                        <a
+                                            href="mailto:sebasile@yahoo.fr"
+                                            className="text-forest hover:text-sage font-bold"
+                                        >
                                             sebasile@yahoo.fr
                                         </a>
+                                    ),
+                                },
+                                {
+                                    label: 'TIN',
+                                    value: '121512145',
+                                },
+                            ].map((block) => (
+                                <div
+                                    key={block.label}
+                                    className="border-mkt-line border-b py-5"
+                                >
+                                    <h3 className="text-sage mb-2 text-xs font-bold tracking-[0.17em] uppercase">
+                                        {block.label}
+                                    </h3>
+                                    <p className="text-ink text-[0.95rem] leading-relaxed">
+                                        {block.value}
                                     </p>
                                 </div>
-                                <div className="contact-block reveal delay-4">
-                                    <h3>TIN</h3>
-                                    <p>121512145</p>
-                                </div>
-                            </div>
+                            ))}
                         </div>
+                    </div>
 
-                        <div className="contact-form-shell reveal delay-1">
-                            <Form
-                                {...store.form()}
-                                className="contact-form"
-                                resetOnSuccess
-                            >
-                                {({
-                                    errors,
-                                    processing,
-                                    recentlySuccessful,
-                                }) => (
-                                    <>
-                                        <h2>Send us a message.</h2>
-                                        <p>
-                                            Tell us enough to understand where
-                                            you are and what needs to move next.
-                                        </p>
-                                        <div className="form-grid">
-                                            <div className="field">
-                                                <label htmlFor="full-name">
-                                                    Full name
-                                                </label>
-                                                <input
-                                                    id="full-name"
-                                                    name="fullName"
-                                                    autoComplete="name"
-                                                    maxLength={120}
-                                                    required
-                                                    aria-invalid={Boolean(
-                                                        errors.fullName,
-                                                    )}
-                                                    aria-describedby={
-                                                        errors.fullName
-                                                            ? 'full-name-error'
-                                                            : undefined
-                                                    }
-                                                />
-                                                {errors.fullName && (
-                                                    <span
-                                                        className="field-error"
-                                                        id="full-name-error"
-                                                        role="alert"
-                                                    >
-                                                        {errors.fullName}
-                                                    </span>
+                    {/* FORM */}
+                    <div className="border-mkt-line border-t pt-10 lg:pt-0">
+                        <Form
+                            {...store.form()}
+                            className="flex flex-col gap-5 lg:gap-[1.9rem]"
+                            resetOnSuccess
+                        >
+                            {({ errors, processing, recentlySuccessful }) => (
+                                <>
+                                    <h2 className="font-heading text-ink text-2xl leading-tight font-semibold tracking-[-0.02em] text-balance lg:text-[2.2rem]">
+                                        Send us a message.
+                                    </h2>
+
+                                    <div className="grid grid-cols-1 gap-x-8 gap-y-7 md:grid-cols-2">
+                                        <Field
+                                            id="full-name"
+                                            label="Full name"
+                                            error={errors.fullName}
+                                            errorId="full-name-error"
+                                        >
+                                            <input
+                                                className={inputClass}
+                                                id="full-name"
+                                                name="fullName"
+                                                autoComplete="name"
+                                                maxLength={120}
+                                                required
+                                                aria-invalid={Boolean(
+                                                    errors.fullName,
                                                 )}
-                                            </div>
-                                            <div className="field">
-                                                <label htmlFor="organization">
-                                                    Organization
-                                                </label>
-                                                <input
-                                                    id="organization"
-                                                    name="organization"
-                                                    autoComplete="organization"
-                                                    maxLength={160}
-                                                    required
-                                                    aria-invalid={Boolean(
-                                                        errors.organization,
-                                                    )}
-                                                    aria-describedby={
-                                                        errors.organization
-                                                            ? 'organization-error'
-                                                            : undefined
-                                                    }
-                                                />
-                                                {errors.organization && (
-                                                    <span
-                                                        className="field-error"
-                                                        id="organization-error"
-                                                        role="alert"
-                                                    >
-                                                        {errors.organization}
-                                                    </span>
-                                                )}
-                                            </div>
-                                            <div className="field">
-                                                <label htmlFor="email">
-                                                    Email address
-                                                </label>
-                                                <input
-                                                    id="email"
-                                                    type="email"
-                                                    name="email"
-                                                    autoComplete="email"
-                                                    inputMode="email"
-                                                    spellCheck={false}
-                                                    maxLength={254}
-                                                    required
-                                                    aria-invalid={Boolean(
-                                                        errors.email,
-                                                    )}
-                                                    aria-describedby={
-                                                        errors.email
-                                                            ? 'email-error'
-                                                            : undefined
-                                                    }
-                                                />
-                                                {errors.email && (
-                                                    <span
-                                                        className="field-error"
-                                                        id="email-error"
-                                                        role="alert"
-                                                    >
-                                                        {errors.email}
-                                                    </span>
-                                                )}
-                                            </div>
-                                            <div className="field">
-                                                <label htmlFor="phone">
-                                                    Phone number
-                                                </label>
-                                                <input
-                                                    id="phone"
-                                                    type="tel"
-                                                    name="phone"
-                                                    autoComplete="tel"
-                                                    inputMode="tel"
-                                                    maxLength={40}
-                                                    aria-invalid={Boolean(
-                                                        errors.phone,
-                                                    )}
-                                                    aria-describedby={
-                                                        errors.phone
-                                                            ? 'phone-error'
-                                                            : undefined
-                                                    }
-                                                />
-                                                {errors.phone && (
-                                                    <span
-                                                        className="field-error"
-                                                        id="phone-error"
-                                                        role="alert"
-                                                    >
-                                                        {errors.phone}
-                                                    </span>
-                                                )}
-                                            </div>
-                                            <div className="field full">
-                                                <label htmlFor="interest">
-                                                    Area of interest
-                                                </label>
-                                                <select
-                                                    id="interest"
-                                                    name="interest"
-                                                    defaultValue=""
-                                                    required
-                                                    aria-invalid={Boolean(
-                                                        errors.interest,
-                                                    )}
-                                                    aria-describedby={
-                                                        errors.interest
-                                                            ? 'interest-error'
-                                                            : undefined
-                                                    }
-                                                >
-                                                    <option value="" disabled>
-                                                        Select an advisory area
-                                                    </option>
-                                                    {interests.map(
-                                                        (interest) => (
-                                                            <option
-                                                                key={interest}
-                                                                value={interest}
-                                                            >
-                                                                {interest}
-                                                            </option>
-                                                        ),
-                                                    )}
-                                                </select>
-                                                {errors.interest && (
-                                                    <span
-                                                        className="field-error"
-                                                        id="interest-error"
-                                                        role="alert"
-                                                    >
-                                                        {errors.interest}
-                                                    </span>
-                                                )}
-                                            </div>
-                                            <div className="field full">
-                                                <label htmlFor="location">
-                                                    Project location
-                                                </label>
-                                                <input
-                                                    id="location"
-                                                    name="location"
-                                                    autoComplete="off"
-                                                    maxLength={160}
-                                                    placeholder="District, country, or region…"
-                                                    aria-invalid={Boolean(
-                                                        errors.location,
-                                                    )}
-                                                    aria-describedby={
-                                                        errors.location
-                                                            ? 'location-error'
-                                                            : undefined
-                                                    }
-                                                />
-                                                {errors.location && (
-                                                    <span
-                                                        className="field-error"
-                                                        id="location-error"
-                                                        role="alert"
-                                                    >
-                                                        {errors.location}
-                                                    </span>
-                                                )}
-                                            </div>
-                                            <div className="field full">
-                                                <label htmlFor="message">
-                                                    Message / project
-                                                    description
-                                                </label>
-                                                <textarea
-                                                    id="message"
-                                                    name="message"
-                                                    minLength={20}
-                                                    maxLength={5000}
-                                                    required
-                                                    placeholder="What decision, challenge, or opportunity are you working through?…"
-                                                    aria-invalid={Boolean(
-                                                        errors.message,
-                                                    )}
-                                                    aria-describedby={
-                                                        errors.message
-                                                            ? 'message-error'
-                                                            : undefined
-                                                    }
-                                                />
-                                                {errors.message && (
-                                                    <span
-                                                        className="field-error"
-                                                        id="message-error"
-                                                        role="alert"
-                                                    >
-                                                        {errors.message}
-                                                    </span>
-                                                )}
-                                            </div>
-                                            <div
-                                                className="contact-honeypot"
-                                                aria-hidden="true"
-                                            >
-                                                <label htmlFor="website">
-                                                    Website
-                                                </label>
-                                                <input
-                                                    id="website"
-                                                    name="website"
-                                                    tabIndex={-1}
-                                                    autoComplete="off"
-                                                />
-                                            </div>
-                                        </div>
-                                        <div className="form-actions">
-                                            <span
-                                                className="form-status"
-                                                role={
-                                                    recentlySuccessful
-                                                        ? 'status'
+                                                aria-describedby={
+                                                    errors.fullName
+                                                        ? 'full-name-error'
                                                         : undefined
                                                 }
-                                                aria-live="polite"
-                                            >
-                                                {recentlySuccessful
-                                                    ? 'Thank you. Your inquiry has been sent.'
-                                                    : 'We respect the context behind every brief.'}
-                                            </span>
-                                            <button
-                                                className="btn btn-primary"
-                                                type="submit"
-                                                disabled={processing}
-                                            >
-                                                {processing
-                                                    ? 'Sending…'
-                                                    : 'Send inquiry'}
-                                            </button>
-                                        </div>
-                                    </>
-                                )}
-                            </Form>
-                        </div>
-                    </div>
-                </div>
-            </section>
+                                            />
+                                        </Field>
+                                        <Field
+                                            id="organization"
+                                            label="Organization"
+                                            error={errors.organization}
+                                            errorId="organization-error"
+                                        >
+                                            <input
+                                                className={inputClass}
+                                                id="organization"
+                                                name="organization"
+                                                autoComplete="organization"
+                                                maxLength={160}
+                                                required
+                                                aria-invalid={Boolean(
+                                                    errors.organization,
+                                                )}
+                                                aria-describedby={
+                                                    errors.organization
+                                                        ? 'organization-error'
+                                                        : undefined
+                                                }
+                                            />
+                                        </Field>
+                                        <Field
+                                            id="email"
+                                            label="Email address"
+                                            error={errors.email}
+                                            errorId="email-error"
+                                        >
+                                            <input
+                                                className={inputClass}
+                                                id="email"
+                                                type="email"
+                                                name="email"
+                                                autoComplete="email"
+                                                inputMode="email"
+                                                spellCheck={false}
+                                                maxLength={254}
+                                                required
+                                                aria-invalid={Boolean(
+                                                    errors.email,
+                                                )}
+                                                aria-describedby={
+                                                    errors.email
+                                                        ? 'email-error'
+                                                        : undefined
+                                                }
+                                            />
+                                        </Field>
+                                        <Field
+                                            id="phone"
+                                            label="Phone number"
+                                            error={errors.phone}
+                                            errorId="phone-error"
+                                        >
+                                            <input
+                                                className={inputClass}
+                                                id="phone"
+                                                type="tel"
+                                                name="phone"
+                                                autoComplete="tel"
+                                                inputMode="tel"
+                                                maxLength={40}
+                                                aria-invalid={Boolean(
+                                                    errors.phone,
+                                                )}
+                                                aria-describedby={
+                                                    errors.phone
+                                                        ? 'phone-error'
+                                                        : undefined
+                                                }
+                                            />
+                                        </Field>
+                                    </div>
 
-            <section className="cta-band">
-                <div className="cta-inner reveal container">
-                    <div>
-                        <h2 className="display">
-                            Grounded in the field. Ready for the decision.
-                        </h2>
+                                    <Field
+                                        id="interest"
+                                        label="Area of interest"
+                                        error={errors.interest}
+                                        errorId="interest-error"
+                                    >
+                                        <select
+                                            className={inputClass}
+                                            id="interest"
+                                            name="interest"
+                                            defaultValue=""
+                                            required
+                                            aria-invalid={Boolean(
+                                                errors.interest,
+                                            )}
+                                            aria-describedby={
+                                                errors.interest
+                                                    ? 'interest-error'
+                                                    : undefined
+                                            }
+                                        >
+                                            <option value="" disabled>
+                                                Select an advisory area
+                                            </option>
+                                            {interests.map((interest) => (
+                                                <option
+                                                    key={interest}
+                                                    value={interest}
+                                                >
+                                                    {interest}
+                                                </option>
+                                            ))}
+                                        </select>
+                                    </Field>
+
+                                    <Field
+                                        id="location"
+                                        label="Project location"
+                                        error={errors.location}
+                                        errorId="location-error"
+                                    >
+                                        <input
+                                            className={inputClass}
+                                            id="location"
+                                            name="location"
+                                            autoComplete="off"
+                                            maxLength={160}
+                                            placeholder="District, country, or region…"
+                                            aria-invalid={Boolean(
+                                                errors.location,
+                                            )}
+                                            aria-describedby={
+                                                errors.location
+                                                    ? 'location-error'
+                                                    : undefined
+                                            }
+                                        />
+                                    </Field>
+
+                                    <Field
+                                        id="message"
+                                        label="Message / project description"
+                                        error={errors.message}
+                                        errorId="message-error"
+                                    >
+                                        <textarea
+                                            className={cn(
+                                                inputClass,
+                                                'min-h-32 resize-y',
+                                            )}
+                                            id="message"
+                                            name="message"
+                                            minLength={20}
+                                            maxLength={5000}
+                                            required
+                                            placeholder="What decision, challenge, or opportunity are you working through?…"
+                                            aria-invalid={Boolean(
+                                                errors.message,
+                                            )}
+                                            aria-describedby={
+                                                errors.message
+                                                    ? 'message-error'
+                                                    : undefined
+                                            }
+                                        />
+                                    </Field>
+
+                                    <div
+                                        className="contact-honeypot sr-only"
+                                        aria-hidden="true"
+                                    >
+                                        <label htmlFor="website">Website</label>
+                                        <input
+                                            className={inputClass}
+                                            id="website"
+                                            name="website"
+                                            tabIndex={-1}
+                                            autoComplete="off"
+                                        />
+                                    </div>
+
+                                    <div className="border-mkt-line mt-2 flex flex-col items-start gap-6 border-t pt-8 md:flex-row md:items-center md:justify-between">
+                                        <span
+                                            className="text-mkt-muted max-w-[30ch] text-sm leading-relaxed"
+                                            role={
+                                                recentlySuccessful
+                                                    ? 'status'
+                                                    : undefined
+                                            }
+                                            aria-live="polite"
+                                        >
+                                            {recentlySuccessful
+                                                ? 'Thank you. Your inquiry has been sent.'
+                                                : 'We respect the context behind every brief.'}
+                                        </span>
+                                        <button
+                                            type="submit"
+                                            disabled={processing}
+                                            className={cn(
+                                                'bg-forest text-paper hover:bg-forest-deep inline-flex items-center justify-center rounded-full px-8 py-3.5 text-sm font-semibold transition-colors disabled:opacity-55',
+                                            )}
+                                        >
+                                            {processing
+                                                ? 'Sending…'
+                                                : 'Send inquiry'}
+                                        </button>
+                                    </div>
+                                </>
+                            )}
+                        </Form>
                     </div>
-                    <ActionButton to="services" variant="light">
-                        Explore our services
-                    </ActionButton>
                 </div>
             </section>
         </>
+    );
+}
+
+const inputClass =
+    'peer w-full min-h-[52px] border-0 border-b border-mkt-line bg-transparent py-3.5 text-base text-ink outline-none transition-colors focus:border-b-2 focus:border-sage aria-[invalid=true]:border-b-clay lg:text-[1.15rem]';
+
+function Field({
+    id,
+    label,
+    children,
+    error,
+    errorId,
+}: {
+    id: string;
+    label: string;
+    children: React.ReactNode;
+    error?: string;
+    errorId: string;
+}) {
+    return (
+        <div className="flex flex-col gap-2">
+            <label
+                htmlFor={id}
+                className="text-mkt-muted text-xs font-semibold tracking-wide"
+            >
+                {label}
+            </label>
+            {children}
+            {error ? (
+                <span className="text-clay text-xs" id={errorId} role="alert">
+                    {error}
+                </span>
+            ) : null}
+        </div>
     );
 }

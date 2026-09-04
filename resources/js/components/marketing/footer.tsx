@@ -1,69 +1,179 @@
 import { Link } from '@inertiajs/react';
-import { Github, Instagram, Linkedin, Youtube } from 'lucide-react';
+import {
+    Facebook,
+    Instagram,
+    Linkedin,
+    type LucideIcon,
+    Twitter,
+} from 'lucide-react';
 import BrandLogo from '@/components/brand-logo';
 import { about, contact, home, projects, services } from '@/routes';
 import type { RouteDefinition } from '@/wayfinder';
 
-const socialLinks = [
-    { label: 'Instagram', href: '#', icon: Instagram },
-    { label: 'LinkedIn', href: '#', icon: Linkedin },
-    { label: 'GitHub', href: '#', icon: Github },
-    { label: 'YouTube', href: '#', icon: Youtube },
-];
+type FooterLink = {
+    label: string;
+    href: RouteDefinition<'get'>;
+};
 
-const serviceLinks = [
+const exploreLinks: FooterLink[] = [
+    { label: 'Home', href: home() },
     { label: 'Services', href: services() },
     { label: 'Projects', href: projects() },
+];
+
+const companyLinks: FooterLink[] = [
+    { label: 'About us', href: about() },
+    { label: 'Our approach', href: about() },
     { label: 'Contact', href: contact() },
 ];
 
-const companyLinks = [
-    { label: 'About', href: about() },
-    { label: 'Our approach', href: about() },
-    { label: 'Kigali, Rwanda', href: contact() },
+const socialLinks: { label: string; href: string; icon: LucideIcon }[] = [
+    {
+        label: 'LinkedIn',
+        href: 'https://www.linkedin.com',
+        icon: Linkedin,
+    },
+    {
+        label: 'Facebook',
+        href: 'https://www.facebook.com',
+        icon: Facebook,
+    },
+    {
+        label: 'Instagram',
+        href: 'https://www.instagram.com',
+        icon: Instagram,
+    },
+    {
+        label: 'X / Twitter',
+        href: 'https://x.com',
+        icon: Twitter,
+    },
 ];
+
+const footerLinkClassName =
+    'text-paper/70 hover:text-paper inline-flex min-h-6 items-center text-sm leading-6 transition-colors';
 
 export default function Footer() {
     return (
-        <footer className="site-footer" aria-labelledby="footer-heading">
+        <footer
+            className="bg-forest-deep text-paper marketing-gutter"
+            aria-labelledby="footer-heading"
+        >
             <h2 id="footer-heading" className="sr-only">
                 Footer
             </h2>
 
-            <div className="container">
-                <div className="footer-grid">
-                    <div className="footer-intro">
-                        <Link className="footer-brand" href={home()} prefetch>
+            <div className="mx-auto max-w-7xl pt-16 pb-8 sm:pt-20 lg:pt-24">
+                <div className="border-paper/20 grid gap-x-10 gap-y-14 border-b pb-16 sm:grid-cols-2 sm:pb-20 lg:grid-cols-12 lg:gap-x-8">
+                    <div className="sm:col-span-2 lg:col-span-5">
+                        <Link className="inline-block" href={home()} prefetch>
                             <span className="sr-only">Next Ways home</span>
-                            <BrandLogo className="brand-logo-image" alt="" />
+                            <span className="relative block h-16 w-32 overflow-hidden">
+                                <BrandLogo
+                                    width={256}
+                                    height={256}
+                                    className="absolute -top-24.5 -left-16 w-64 max-w-none brightness-0 invert"
+                                    alt=""
+                                />
+                            </span>
                         </Link>
-                        <p>
-                            Building thoughtful digital experiences for people,
-                            places, and ideas moving forward.
+
+                        <p className="text-paper/70 mt-6 max-w-[34ch] text-sm leading-6 text-pretty">
+                            Field-informed environmental and agribusiness
+                            advisory. Grounded in Rwanda. Working across East
+                            Africa.
                         </p>
-                        <div
-                            className="footer-socials"
-                            aria-label="Social links"
-                        >
-                            {socialLinks.map(({ label, href, icon: Icon }) => (
-                                <a key={label} href={href} aria-label={label}>
-                                    <Icon
-                                        aria-hidden="true"
-                                        size={17}
-                                        strokeWidth={1.8}
-                                    />
-                                </a>
-                            ))}
-                        </div>
+
+                        <nav className="mt-8" aria-label="Social media">
+                            <ul className="flex flex-wrap gap-3" role="list">
+                                {socialLinks.map(
+                                    ({ label, href, icon: SocialIcon }) => (
+                                        <li key={label}>
+                                            <a
+                                                href={href}
+                                                target="_blank"
+                                                rel="noreferrer"
+                                                aria-label={label}
+                                                className="border-paper/25 text-paper/75 hover:bg-paper hover:text-forest inline-flex h-11 w-11 items-center justify-center rounded-full border transition-[background-color,color,border-color]"
+                                            >
+                                                <SocialIcon
+                                                    aria-hidden="true"
+                                                    size={18}
+                                                    strokeWidth={1.8}
+                                                />
+                                            </a>
+                                        </li>
+                                    ),
+                                )}
+                            </ul>
+                        </nav>
                     </div>
 
-                    <FooterLinkGroup title="What we do" links={serviceLinks} />
-                    <FooterLinkGroup title="Company" links={companyLinks} />
+                    <FooterLinkGroup
+                        title="Explore"
+                        links={exploreLinks}
+                        className="lg:col-span-2"
+                    />
+
+                    <FooterLinkGroup
+                        title="Company"
+                        links={companyLinks}
+                        className="lg:col-span-2"
+                    />
+
+                    <section className="sm:col-span-2 lg:col-span-3">
+                        <h3 className="text-sage-pale text-xs font-bold tracking-[0.17em] uppercase">
+                            Contacts
+                        </h3>
+                        <address className="mt-6 not-italic">
+                            <ul className="flex flex-col gap-5" role="list">
+                                <li>
+                                    <p className="text-paper/45 text-[0.68rem] font-bold tracking-[0.14em] uppercase">
+                                        Email
+                                    </p>
+                                    <a
+                                        className={`${footerLinkClassName} mt-1 break-all`}
+                                        href="mailto:sebasile@yahoo.fr"
+                                    >
+                                        sebasile@yahoo.fr
+                                    </a>
+                                </li>
+                                <li>
+                                    <p className="text-paper/45 text-[0.68rem] font-bold tracking-[0.14em] uppercase">
+                                        Phone
+                                    </p>
+                                    <a
+                                        className={`${footerLinkClassName} mt-1`}
+                                        href="tel:+250788867106"
+                                    >
+                                        +250 788 867 106
+                                    </a>
+                                </li>
+                                <li>
+                                    <p className="text-paper/45 text-[0.68rem] font-bold tracking-[0.14em] uppercase">
+                                        Address
+                                    </p>
+                                    <a
+                                        className={`${footerLinkClassName} mt-1 max-w-[28ch] items-start`}
+                                        href="https://maps.google.com/?q=Norrsken+House+Kigali,+KN+78+St,+Kiyovu,+Kigali,+Rwanda"
+                                        target="_blank"
+                                        rel="noreferrer"
+                                    >
+                                        Norrsken House Kigali, KN 78 St, Kiyovu,
+                                        Kigali, Rwanda
+                                    </a>
+                                </li>
+                            </ul>
+                        </address>
+                    </section>
                 </div>
 
-                <div className="footer-bottom">
-                    <span>© {new Date().getFullYear()} Next Ways</span>
-                    <span>Sustainably driven · Kigali, Rwanda</span>
+                <div className="text-paper/55 flex flex-col gap-2 pt-7 text-xs leading-5 sm:flex-row sm:items-center sm:justify-between">
+                    <p>
+                        © {new Date().getFullYear()} Next Ways Ltd. All rights
+                        reserved.
+                    </p>
+                    <p>Sustainably driven · Kigali, Rwanda</p>
                 </div>
             </div>
         </footer>
@@ -73,17 +183,25 @@ export default function Footer() {
 function FooterLinkGroup({
     title,
     links,
+    className,
 }: {
     title: string;
-    links: { label: string; href: RouteDefinition<'get'> }[];
+    links: FooterLink[];
+    className?: string;
 }) {
     return (
-        <nav className="footer-link-group" aria-label={title}>
-            <h3>{title}</h3>
-            <ul>
+        <nav className={className} aria-label={title}>
+            <h3 className="text-sage-pale text-xs font-bold tracking-[0.17em] uppercase">
+                {title}
+            </h3>
+            <ul className="mt-6 flex flex-col gap-3" role="list">
                 {links.map((link) => (
                     <li key={link.label}>
-                        <Link href={link.href} prefetch>
+                        <Link
+                            href={link.href}
+                            prefetch
+                            className={footerLinkClassName}
+                        >
                             {link.label}
                         </Link>
                     </li>

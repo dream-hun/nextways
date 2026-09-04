@@ -7,43 +7,44 @@ const stylesheet = readFileSync(
 );
 
 describe('marketing style safeguards', () => {
-    it('keeps contextual link colors from being overridden by the shell', () => {
-        const shellAnchorRule = stylesheet.match(
-            /\.marketing-shell a\s*\{(?<declarations>[^}]*)\}/,
-        );
+    it('keeps the marketing palette scoped to its shell', () => {
+        expect(stylesheet).toContain('.marketing-shell {');
+        expect(stylesheet).toContain('color: var(--ink);');
+        expect(stylesheet).toContain('background: var(--paper);');
+    });
 
-        expect(shellAnchorRule?.groups?.declarations).not.toContain('color:');
-        expect(stylesheet).toContain('.btn-light {\n    color: var(--forest);');
+    it('makes reveals progressive and keeps focused content visible', () => {
+        expect(stylesheet).toContain('.marketing-shell.motion-ready .reveal');
+        expect(stylesheet).toContain('.reveal:focus-within');
+        expect(stylesheet).toContain('scroll-margin-top: 104px');
+    });
+
+    it('gates pointer motion and disables decorative animation for reduced motion', () => {
         expect(stylesheet).toContain(
-            '.hero .btn-ghost {\n    color: var(--paper);',
+            '@media (hover: hover) and (pointer: fine)',
         );
+        expect(stylesheet).toContain('@media (prefers-reduced-motion: reduce)');
+        expect(stylesheet).toContain('.marketing-shell .animate-marquee');
+        expect(stylesheet).toContain('animation: none');
+        expect(stylesheet).not.toContain('transition: all');
     });
 
-    it('uses the shared responsive heading scale for standalone headings', () => {
-        const displayRule = stylesheet.match(
-            /\.display\s*\{(?<declarations>[^}]*)\}/,
-        );
-
-        expect(displayRule?.groups?.declarations).toContain(
-            'font-size: var(--heading-size);',
-        );
+    it('does not reintroduce layout or typography rules', () => {
+        expect(stylesheet).not.toMatch(/\.hero\s*\{/);
+        expect(stylesheet).not.toMatch(/\.site-nav\s*\{/);
+        expect(stylesheet).not.toMatch(/\.btn\s*\{/);
+        expect(stylesheet).not.toContain('family');
     });
 
-    it('keeps home and inner-page artwork inside their hero boundaries', () => {
-        const heroRule = stylesheet.match(
-            /\.hero\s*\{(?<declarations>[^}]*)\}/,
-        );
-        const pageHeroRule = stylesheet.match(
-            /\.page-hero\s*\{(?<declarations>[^}]*)\}/,
-        );
-        const heroCopyRule = stylesheet.match(
-            /\.hero-home \.hero-copy\s*\{(?<declarations>[^}]*)\}/,
+    it('restores unclipped images and stationary title lines for reduced motion', () => {
+        const reducedMotion = stylesheet.slice(
+            stylesheet.indexOf('@media (prefers-reduced-motion: reduce)'),
         );
 
-        expect(heroRule?.groups?.declarations).toContain('overflow: clip;');
-        expect(pageHeroRule?.groups?.declarations).toContain('overflow: clip;');
-        expect(heroCopyRule?.groups?.declarations).toContain(
-            'width: min(740px, 100%);',
-        );
+        expect(reducedMotion).toContain('.reveal-media img');
+        expect(reducedMotion).toContain('.reveal-line');
+        expect(reducedMotion).toContain('clip-path: none');
+        expect(reducedMotion).toContain('transform: none');
+        expect(reducedMotion).toContain('transition: none');
     });
 });
