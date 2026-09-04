@@ -2,20 +2,20 @@ import {
     MARKETING_HERO_IMAGES,
     MarketingHead,
     PageHero,
-} from "@/components/marketing/site";
-import { Form } from "@inertiajs/react";
-import { store } from "@/routes/contact";
-import { cn } from "@/lib/utils";
+} from '@/components/marketing/site';
+import { Form } from '@inertiajs/react';
+import { store } from '@/routes/contact';
+import { cn } from '@/lib/utils';
 
 const interests = [
-    "Environmental Consulting",
-    "Agribusiness & Value-Chain Analysis",
-    "Cold-Chain & Post-Harvest",
-    "Feasibility & Pre-Investment",
-    "Monitoring & Evaluation",
-    "Digital Agriculture & Traceability",
-    "Rural Transport & Logistics",
-    "Other Advisory Support",
+    'Environmental Consulting',
+    'Agribusiness & Value-Chain Analysis',
+    'Cold-Chain & Post-Harvest',
+    'Feasibility & Pre-Investment',
+    'Monitoring & Evaluation',
+    'Digital Agriculture & Traceability',
+    'Rural Transport & Logistics',
+    'Other Advisory Support',
 ];
 
 export default function Contact() {
@@ -30,7 +30,7 @@ export default function Contact() {
                 image={MARKETING_HERO_IMAGES.contact}
                 title={
                     <>
-                        Let’s discuss your{" "}
+                        Let’s discuss your{' '}
                         <em className="text-sage font-normal not-italic">
                             next project.
                         </em>
@@ -52,7 +52,7 @@ export default function Contact() {
                         <div className="border-mkt-line mt-8 border-t">
                             {[
                                 {
-                                    label: "Head office",
+                                    label: 'Head office',
                                     value: (
                                         <>
                                             Norrsken House Kigali
@@ -64,7 +64,7 @@ export default function Contact() {
                                     ),
                                 },
                                 {
-                                    label: "Registered office",
+                                    label: 'Registered office',
                                     value: (
                                         <>
                                             KN1 Road 30
@@ -76,7 +76,7 @@ export default function Contact() {
                                     ),
                                 },
                                 {
-                                    label: "Phone",
+                                    label: 'Phone',
                                     value: (
                                         <>
                                             <a
@@ -96,7 +96,7 @@ export default function Contact() {
                                     ),
                                 },
                                 {
-                                    label: "Email",
+                                    label: 'Email',
                                     value: (
                                         <a
                                             href="mailto:info@nextways.rw"
@@ -106,7 +106,6 @@ export default function Contact() {
                                         </a>
                                     ),
                                 },
-                                
                             ].map((block) => (
                                 <div
                                     key={block.label}
@@ -155,7 +154,7 @@ export default function Contact() {
                                                 )}
                                                 aria-describedby={
                                                     errors.fullName
-                                                        ? "full-name-error"
+                                                        ? 'full-name-error'
                                                         : undefined
                                                 }
                                             />
@@ -178,7 +177,7 @@ export default function Contact() {
                                                 )}
                                                 aria-describedby={
                                                     errors.organization
-                                                        ? "organization-error"
+                                                        ? 'organization-error'
                                                         : undefined
                                                 }
                                             />
@@ -204,7 +203,7 @@ export default function Contact() {
                                                 )}
                                                 aria-describedby={
                                                     errors.email
-                                                        ? "email-error"
+                                                        ? 'email-error'
                                                         : undefined
                                                 }
                                             />
@@ -228,7 +227,7 @@ export default function Contact() {
                                                 )}
                                                 aria-describedby={
                                                     errors.phone
-                                                        ? "phone-error"
+                                                        ? 'phone-error'
                                                         : undefined
                                                 }
                                             />
@@ -252,7 +251,7 @@ export default function Contact() {
                                             )}
                                             aria-describedby={
                                                 errors.interest
-                                                    ? "interest-error"
+                                                    ? 'interest-error'
                                                     : undefined
                                             }
                                         >
@@ -288,7 +287,7 @@ export default function Contact() {
                                             )}
                                             aria-describedby={
                                                 errors.location
-                                                    ? "location-error"
+                                                    ? 'location-error'
                                                     : undefined
                                             }
                                         />
@@ -303,7 +302,7 @@ export default function Contact() {
                                         <textarea
                                             className={cn(
                                                 inputClass,
-                                                "min-h-32 resize-y",
+                                                'min-h-32 resize-y',
                                             )}
                                             id="message"
                                             name="message"
@@ -316,7 +315,7 @@ export default function Contact() {
                                             )}
                                             aria-describedby={
                                                 errors.message
-                                                    ? "message-error"
+                                                    ? 'message-error'
                                                     : undefined
                                             }
                                         />
@@ -341,25 +340,25 @@ export default function Contact() {
                                             className="text-mkt-muted max-w-[30ch] text-sm leading-relaxed"
                                             role={
                                                 recentlySuccessful
-                                                    ? "status"
+                                                    ? 'status'
                                                     : undefined
                                             }
                                             aria-live="polite"
                                         >
                                             {recentlySuccessful
-                                                ? "Thank you. Your inquiry has been sent."
-                                                : "We respect the context behind every brief."}
+                                                ? 'Thank you. Your inquiry has been sent.'
+                                                : 'We respect the context behind every brief.'}
                                         </span>
                                         <button
                                             type="submit"
                                             disabled={processing}
                                             className={cn(
-                                                "bg-forest text-paper hover:bg-forest-deep inline-flex items-center justify-center rounded-full px-8 py-3.5 text-sm font-semibold transition-colors disabled:opacity-55",
+                                                'bg-forest text-paper hover:bg-forest-deep inline-flex items-center justify-center rounded-full px-8 py-3.5 text-sm font-semibold transition-colors disabled:opacity-55',
                                             )}
                                         >
                                             {processing
-                                                ? "Sending…"
-                                                : "Send inquiry"}
+                                                ? 'Sending…'
+                                                : 'Send inquiry'}
                                         </button>
                                     </div>
                                 </>
@@ -373,7 +372,7 @@ export default function Contact() {
 }
 
 const inputClass =
-    "peer w-full min-h-[52px] border-0 border-b border-mkt-line bg-transparent py-3.5 text-base text-ink outline-none transition-colors focus:border-b-2 focus:border-sage aria-[invalid=true]:border-b-clay lg:text-[1.15rem]";
+    'peer w-full min-h-[52px] border-0 border-b border-mkt-line bg-transparent py-3.5 text-base text-ink outline-none transition-colors focus:border-b-2 focus:border-sage aria-[invalid=true]:border-b-clay lg:text-[1.15rem]';
 
 function Field({
     id,
