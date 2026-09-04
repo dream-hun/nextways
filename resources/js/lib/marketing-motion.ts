@@ -2,6 +2,7 @@ import type { LenisOptions } from 'lenis';
 
 export const MARKETING_LENIS_OPTIONS = {
     autoRaf: true,
+    anchors: { offset: -104 },
     lerp: 0.085,
     respectReducedMotion: true,
     smoothWheel: true,
@@ -9,10 +10,9 @@ export const MARKETING_LENIS_OPTIONS = {
     syncTouch: false,
 } satisfies LenisOptions;
 
-export const MARKETING_SHELL_CLASS_NAME =
-    'marketing-shell site-shell motion-ready' as const;
+export const MARKETING_SHELL_CLASS_NAME = 'marketing-shell site-shell' as const;
 
-export const REVEAL_SELECTOR = '.reveal, .image-shell, .hero-evidence' as const;
+export const REVEAL_SELECTOR = '.reveal' as const;
 
 export const REVEAL_OBSERVER_OPTIONS = {
     threshold: 0.12,
@@ -21,6 +21,69 @@ export const REVEAL_OBSERVER_OPTIONS = {
 
 export function shouldEnableMotion(prefersReducedMotion: boolean): boolean {
     return !prefersReducedMotion;
+}
+
+export function setupMarketingReveals(root: HTMLElement): () => void {
+    const targets = Array.from(
+        root.querySelectorAll<HTMLElement>(REVEAL_SELECTOR),
+    );
+    const preference = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let observer: IntersectionObserver | undefined;
+    let firstFrame = 0;
+    let revealFrame = 0;
+
+    const stopWatching = () => {
+        observer?.disconnect();
+        window.cancelAnimationFrame(firstFrame);
+        window.cancelAnimationFrame(revealFrame);
+        root.classList.remove('motion-ready');
+    };
+
+    const revealAll = () => {
+        stopWatching();
+        targets.forEach((target) => target.classList.add('is-visible'));
+    };
+
+    if (
+        !shouldEnableMotion(preference.matches) ||
+        !('IntersectionObserver' in window)
+    ) {
+        revealAll();
+        return revealAll;
+    }
+
+    root.classList.add('motion-ready');
+    observer = new IntersectionObserver((entries) => {
+        entries
+            .filter((entry) => entry.isIntersecting)
+            .forEach((entry, index) => {
+                const target = entry.target as HTMLElement;
+                target.style.setProperty(
+                    '--reveal-delay',
+                    `${Math.min(index, 3) * 60}ms`,
+                );
+                target.classList.add('is-visible');
+                observer?.unobserve(target);
+            });
+    }, REVEAL_OBSERVER_OPTIONS);
+
+    firstFrame = window.requestAnimationFrame(() => {
+        revealFrame = window.requestAnimationFrame(() => {
+            targets.forEach((target) => observer?.observe(target));
+        });
+    });
+
+    const onPreferenceChange = () => {
+        if (preference.matches) {
+            revealAll();
+        }
+    };
+    preference.addEventListener('change', onPreferenceChange);
+
+    return () => {
+        stopWatching();
+        preference.removeEventListener('change', onPreferenceChange);
+    };
 }
 
 export function getCameraOffset(

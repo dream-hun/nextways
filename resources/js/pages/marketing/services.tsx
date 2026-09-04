@@ -1,10 +1,8 @@
-/* Field Notes / Editorial Practice: warm paper field, Next Ways Forest anchor, DM Serif Display + Manrope, editorial splits, field-note labels, restrained transform/opacity motion. */
 import {
     ActionButton,
+    MARKETING_HERO_IMAGES,
     MarketingHead,
     PageHero,
-    Pathline,
-    SectionHeading,
 } from '@/components/marketing/site';
 
 const serviceGroups = [
@@ -121,109 +119,91 @@ export default function Services() {
             <MarketingHead
                 title="Services"
                 description="Environmental, agribusiness, cold-chain, feasibility, evaluation, digital agriculture, and rural logistics advisory in Rwanda and East Africa."
-                image="/images/nextways-value-chain.png"
+                image={MARKETING_HERO_IMAGES.services.fallbackSrc}
             />
+
             <PageHero
-                kind="services"
-                label="Our services"
-                title="The work behind better decisions."
-                description="Advisory services designed to help clients understand complex environmental and agri-food challenges, assess investment opportunities, and develop practical interventions."
-                aside={
-                    <div className="hero-evidence">
-                        <div className="evidence-value">
-                            7 areas
-                            <br />
-                            <em>of work.</em>
-                        </div>
-                        <p>
-                            From environmental review and value chains to
-                            digital agriculture and rural logistics.
-                        </p>
-                    </div>
+                image={MARKETING_HERO_IMAGES.services}
+                title={
+                    <>
+                        The work behind{' '}
+                        <em className="text-sage font-normal not-italic">
+                            better decisions.
+                        </em>
+                    </>
                 }
+                description="Advisory services designed to help clients understand complex environmental and agri-food challenges, assess investment opportunities, and develop practical interventions."
             />
 
-            <section className="section">
-                <div className="container">
-                    <SectionHeading
-                        label="01 / A practical brief"
-                        title={
-                            <>
-                                From complexity to <em>clarity.</em>
-                            </>
-                        }
-                    >
-                        <p>
-                            Our work covers the full arc from first question to
-                            implementable next move: fieldwork, assessment,
-                            analysis, appraisal, and learning.
-                        </p>
-                        <p style={{ marginTop: 22 }}>
-                            We work with the details that make an intervention
-                            viable: technical choices, local institutions,
-                            operating models, budgets, logistics, and the people
-                            who will carry it forward.
-                        </p>
-                    </SectionHeading>
-                    <Pathline
-                        steps={[
-                            'Scope the question',
-                            'Assess the system',
-                            'Model the options',
-                            'Recommend the move',
-                        ]}
-                    />
-
-                    <div className="services-list">
-                        {serviceGroups.map((service, index) => (
-                            <article
-                                className={`service-detail reveal delay-${Math.min(index + 1, 4)}`}
-                                key={service.number}
-                            >
-                                <div className="detail-number">
-                                    {service.number}
-                                </div>
-                                <div>
-                                    <h3>{service.title}</h3>
-                                </div>
-                                <div className="detail-copy">
-                                    <p>{service.description}</p>
-                                    <div className="detail-deliverables">
-                                        {service.deliverables.map((item) => (
-                                            <span key={item}>{item}</span>
-                                        ))}
-                                    </div>
-                                    <div className="scope-title">
-                                        Typical deliverables
-                                    </div>
-                                    <p style={{ marginBottom: 0 }}>
-                                        {service.outcome}
-                                    </p>
-                                </div>
-                            </article>
-                        ))}
-                    </div>
+            {/* SERVICE SECTIONS */}
+            <section className="marketing-container py-20 lg:py-32">
+                <div className="max-w-3xl pb-12">
+                    <p className="text-sage mb-4 text-xs font-bold tracking-[0.2em] uppercase">
+                        What we deliver
+                    </p>
+                    <h2 className="font-heading text-ink text-2xl leading-tight font-semibold tracking-tight text-balance sm:text-5xl lg:text-xl">
+                        From complexity to clarity.
+                    </h2>
+                    <p className="text-mkt-muted mt-4 max-w-7xl leading-relaxed">
+                        Our work covers the full arc from first question to
+                        implementable next move: fieldwork, assessment,
+                        analysis, appraisal, and learning.
+                    </p>
                 </div>
+
+                <div className="h-4" />
+
+                {serviceGroups.map((service) => (
+                    <div
+                        key={service.number}
+                        className="reveal border-mkt-line grid grid-cols-1 gap-6 border-t py-8 md:grid-cols-[1fr_1.6fr] md:gap-5 lg:gap-16 lg:py-14"
+                    >
+                        <div className="flex items-baseline gap-4 md:block">
+                            <span className="text-sage text-xs font-bold tracking-[0.2em]">
+                                {service.number}
+                            </span>
+                            <h3 className="font-heading text-ink max-w-[25ch] text-xl leading-snug font-medium tracking-tight md:mt-5 lg:text-2xl">
+                                {service.title}
+                            </h3>
+                        </div>
+                        <div className="min-w-0">
+                            <p className="text-mkt-muted max-w-[52ch] text-lg leading-relaxed">
+                                {service.description}
+                            </p>
+                            <div className="mt-5 flex flex-wrap gap-2">
+                                {service.deliverables.map((item) => (
+                                    <span
+                                        key={item}
+                                        className="bg-sage-pale text-forest px-3 py-1.5 text-xs font-bold"
+                                    >
+                                        {item}
+                                    </span>
+                                ))}
+                            </div>
+                            <p className="text-mkt-muted mt-5 max-w-[46ch] text-sm leading-relaxed">
+                                <span className="text-forest text-xs font-bold tracking-[0.17em] uppercase">
+                                    Typical deliverables
+                                </span>
+                                <br />
+                                {service.outcome}
+                            </p>
+                        </div>
+                    </div>
+                ))}
             </section>
 
-            <section className="section forest-panel">
-                <div className="container">
-                    <SectionHeading
-                        title={
-                            <>
-                                A tailored brief, not a <em>template.</em>
-                            </>
-                        }
-                        light
-                    >
-                        <p>
-                            Tell us about the challenge, programme, investment,
-                            or value chain you are working on. We’ll shape the
-                            right advisory engagement around the decisions
-                            ahead.
-                        </p>
-                    </SectionHeading>
-                    <div className="reveal delay-2" style={{ marginTop: 42 }}>
+            {/* PROOF / CLOSE */}
+            <section className="bg-forest text-paper marketing-gutter py-18 lg:py-32">
+                <div className="mx-auto max-w-7xl text-center">
+                    <h2 className="reveal font-heading max-w-7xl text-[2.2rem] leading-tight font-semibold tracking-tight text-balance sm:text-5xl lg:text-[4rem]">
+                        A tailored brief, not a template.
+                    </h2>
+                    <p className="reveal text-paper/70 mt-6 max-w-full leading-relaxed">
+                        Tell us about the challenge, programme, investment, or
+                        value chain you are working on. We’ll shape the right
+                        advisory engagement around the decisions ahead.
+                    </p>
+                    <div className="reveal mt-10">
                         <ActionButton to="contact" variant="light">
                             Discuss your project
                         </ActionButton>

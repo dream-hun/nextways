@@ -98,7 +98,7 @@ export function AppHeader({ breadcrumbs = [] }: Props) {
                                 <div className="flex h-full flex-1 flex-col gap-4 p-4">
                                     <div className="flex h-full flex-col justify-between text-sm">
                                         <div className="flex flex-col gap-4">
-                                                    {mainNavItems.map((item) => (
+                                            {mainNavItems.map((item) => (
                                                 <Link
                                                     key={item.title}
                                                     href={item.href}
@@ -113,7 +113,7 @@ export function AppHeader({ breadcrumbs = [] }: Props) {
                                         </div>
 
                                         <div className="flex flex-col gap-4">
-                                                    {rightNavItems.map((item) => (
+                                            {rightNavItems.map((item) => (
                                                 <a
                                                     key={item.title}
                                                     href={toUrl(item.href)}
