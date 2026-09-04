@@ -5,7 +5,5 @@ import BrandLogo from '@/components/brand-logo';
 export default function AppLogoIcon(
     props: Omit<ComponentPropsWithoutRef<'img'>, 'src'>,
 ) {
-    return (
-        <BrandLogo {...props} variant="icon" />
-    );
+    return <BrandLogo {...props} variant="icon" />;
 }

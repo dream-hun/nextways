@@ -40,10 +40,7 @@ export default function SettingsLayout({ children }: PropsWithChildren) {
 
             <div className="flex flex-col lg:flex-row lg:gap-12">
                 <aside className="w-full max-w-xl lg:w-48">
-                    <nav
-                        className="flex flex-col gap-1"
-                        aria-label="Settings"
-                    >
+                    <nav className="flex flex-col gap-1" aria-label="Settings">
                         {sidebarNavItems.map((item, index) => (
                             <Button
                                 key={`${toUrl(item.href)}-${index}`}
