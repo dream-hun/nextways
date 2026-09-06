@@ -1,11 +1,5 @@
-import { Link } from '@inertiajs/react';
-import {
-    Facebook,
-    Instagram,
-    Linkedin,
-    type LucideIcon,
-    Twitter,
-} from 'lucide-react';
+import { Link, usePage } from '@inertiajs/react';
+import { Facebook, Instagram, Linkedin, Twitter, Youtube } from 'lucide-react';
 import BrandLogo from '@/components/brand-logo';
 import { about, contact, home, projects, services } from '@/routes';
 import type { RouteDefinition } from '@/wayfinder';
@@ -27,33 +21,20 @@ const companyLinks: FooterLink[] = [
     { label: 'Contact', href: contact() },
 ];
 
-const socialLinks: { label: string; href: string; icon: LucideIcon }[] = [
-    {
-        label: 'LinkedIn',
-        href: 'https://www.linkedin.com',
-        icon: Linkedin,
-    },
-    {
-        label: 'Facebook',
-        href: 'https://www.facebook.com',
-        icon: Facebook,
-    },
-    {
-        label: 'Instagram',
-        href: 'https://www.instagram.com',
-        icon: Instagram,
-    },
-    {
-        label: 'X / Twitter',
-        href: 'https://x.com',
-        icon: Twitter,
-    },
-];
-
 const footerLinkClassName =
     'text-paper/70 hover:text-paper inline-flex min-h-6 items-center text-sm leading-6 transition-colors';
 
 export default function Footer() {
+    const { siteContact } = usePage().props;
+    const socialLinks = [
+        { label: 'LinkedIn', href: siteContact.linkedin, icon: Linkedin },
+        { label: 'Facebook', href: siteContact.facebook, icon: Facebook },
+        { label: 'Instagram', href: siteContact.instagram, icon: Instagram },
+        { label: 'X / Twitter', href: siteContact.twitter, icon: Twitter },
+        { label: 'YouTube', href: siteContact.youtube, icon: Youtube },
+    ].filter((link): link is typeof link & { href: string } =>
+        Boolean(link.href),
+    );
     return (
         <footer
             className="bg-forest-deep text-paper marketing-gutter"
@@ -84,29 +65,34 @@ export default function Footer() {
                             Africa.
                         </p>
 
-                        <nav className="mt-8" aria-label="Social media">
-                            <ul className="flex flex-wrap gap-3" role="list">
-                                {socialLinks.map(
-                                    ({ label, href, icon: SocialIcon }) => (
-                                        <li key={label}>
-                                            <a
-                                                href={href}
-                                                target="_blank"
-                                                rel="noreferrer"
-                                                aria-label={label}
-                                                className="border-paper/25 text-paper/75 hover:bg-paper hover:text-forest inline-flex h-11 w-11 items-center justify-center rounded-full border transition-[background-color,color,border-color]"
-                                            >
-                                                <SocialIcon
-                                                    aria-hidden="true"
-                                                    size={18}
-                                                    strokeWidth={1.8}
-                                                />
-                                            </a>
-                                        </li>
-                                    ),
-                                )}
-                            </ul>
-                        </nav>
+                        {socialLinks.length > 0 && (
+                            <nav className="mt-8" aria-label="Social media">
+                                <ul
+                                    className="flex flex-wrap gap-3"
+                                    role="list"
+                                >
+                                    {socialLinks.map(
+                                        ({ label, href, icon: SocialIcon }) => (
+                                            <li key={label}>
+                                                <a
+                                                    href={href}
+                                                    target="_blank"
+                                                    rel="noreferrer"
+                                                    aria-label={label}
+                                                    className="border-paper/25 text-paper/75 hover:bg-paper hover:text-forest inline-flex h-11 w-11 items-center justify-center rounded-full border transition-[background-color,color,border-color]"
+                                                >
+                                                    <SocialIcon
+                                                        aria-hidden="true"
+                                                        size={18}
+                                                        strokeWidth={1.8}
+                                                    />
+                                                </a>
+                                            </li>
+                                        ),
+                                    )}
+                                </ul>
+                            </nav>
+                        )}
                     </div>
 
                     <FooterLinkGroup
@@ -133,9 +119,9 @@ export default function Footer() {
                                     </p>
                                     <a
                                         className={`${footerLinkClassName} mt-1 break-all`}
-                                        href="mailto:sebasile@yahoo.fr"
+                                        href={`mailto:${siteContact.email}`}
                                     >
-                                        sebasile@yahoo.fr
+                                        {siteContact.email}
                                     </a>
                                 </li>
                                 <li>
@@ -144,9 +130,9 @@ export default function Footer() {
                                     </p>
                                     <a
                                         className={`${footerLinkClassName} mt-1`}
-                                        href="tel:+250788867106"
+                                        href={`tel:${siteContact.phone.replace(/[^+\d]/g, '')}`}
                                     >
-                                        +250 788 867 106
+                                        {siteContact.phone}
                                     </a>
                                 </li>
                                 <li>
@@ -155,12 +141,11 @@ export default function Footer() {
                                     </p>
                                     <a
                                         className={`${footerLinkClassName} mt-1 max-w-[28ch] items-start`}
-                                        href="https://maps.google.com/?q=Norrsken+House+Kigali,+KN+78+St,+Kiyovu,+Kigali,+Rwanda"
+                                        href={`https://maps.google.com/?q=${encodeURIComponent(siteContact.address)}`}
                                         target="_blank"
                                         rel="noreferrer"
                                     >
-                                        Norrsken House Kigali, KN 78 St, Kiyovu,
-                                        Kigali, Rwanda
+                                        {siteContact.address}
                                     </a>
                                 </li>
                             </ul>

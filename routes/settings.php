@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Http\Controllers\Settings\ProfileController;
 use App\Http\Controllers\Settings\SecurityController;
+use App\Http\Controllers\Settings\SiteContactController;
 use Illuminate\Auth\Middleware\RequirePassword;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -29,6 +30,11 @@ Route::middleware(['auth', 'verified'])->group(function (): void {
 
     Route::get('settings/appearance', fn (): Response => Inertia::render('settings/appearance'))
         ->name('appearance.edit');
+});
+
+Route::middleware(['auth', 'verified', 'can:manage-site-contact'])->group(function (): void {
+    Route::get('settings/site-contact', [SiteContactController::class, 'edit'])->name('site-contact.edit');
+    Route::put('settings/site-contact', [SiteContactController::class, 'update'])->name('site-contact.update');
 });
 
 Route::get('.well-known/passkey-endpoints', function () {

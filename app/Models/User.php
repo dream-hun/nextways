@@ -17,6 +17,7 @@ use Laravel\Fortify\PasskeyAuthenticatable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 
 /**
+ * @property bool $is_admin
  * @property int $id
  * @property string $name
  * @property string $email
@@ -36,6 +37,9 @@ final class User extends Authenticatable implements MustVerifyEmail, PasskeyUser
     /** @use HasFactory<UserFactory> */
     use HasFactory, Notifiable, PasskeyAuthenticatable, TwoFactorAuthenticatable;
 
+    /** @var array<string, mixed> */
+    protected $attributes = ['is_admin' => false];
+
     /**
      * Get the attributes that should be cast.
      *
@@ -44,6 +48,7 @@ final class User extends Authenticatable implements MustVerifyEmail, PasskeyUser
     protected function casts(): array
     {
         return [
+            'is_admin' => 'boolean',
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
             'two_factor_confirmed_at' => 'datetime',

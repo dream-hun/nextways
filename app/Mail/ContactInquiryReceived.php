@@ -16,6 +16,11 @@ final class ContactInquiryReceived extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public int $tries = 3;
+
+    /** @var list<int> */
+    public array $backoff = [60, 300];
+
     /**
      * @param  array{fullName: string, organization: string, email: string, phone?: string|null, interest: string, location?: string|null, message: string}  $inquiry
      */

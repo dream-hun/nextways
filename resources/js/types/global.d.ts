@@ -1,3 +1,4 @@
+import type { SiteContact } from '@/types/site-contact';
 import type { Auth } from '@/types/auth';
 
 declare module 'react' {
@@ -9,6 +10,7 @@ declare module 'react' {
 declare module '@inertiajs/core' {
     export interface InertiaConfig {
         sharedPageProps: {
+            siteContact: SiteContact;
             name: string;
             appUrl: string;
             auth: Auth;

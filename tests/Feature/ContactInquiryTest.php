@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Http\Requests\StoreContactInquiryRequest;
 use App\Mail\ContactInquiryReceived;
+use App\Models\Contact;
 use Illuminate\Support\Facades\Mail;
 
 /**
@@ -23,14 +24,19 @@ function validInquiry(): array
     ];
 }
 
-it('sends a valid website inquiry to the configured recipient', function (): void {
+it('saves a valid website inquiry and queues email to the configured recipient', function (): void {
     Mail::fake();
     config()->set('mail.contact_to', 'advisory@nextways.rw');
 
     $response = $this->post(route('contact.store'), validInquiry());
 
-    $response->assertRedirectToRoute('contact');
-    Mail::assertSent(ContactInquiryReceived::class, function (ContactInquiryReceived $mail): bool {
+    $response->assertRedirectToRoute('contact')->assertSessionHas('success');
+    $this->assertDatabaseCount('contacts', 1);
+    $this->assertDatabaseHas('contacts', [
+        'full_name' => 'Aline Uwase',
+        ...collect(validInquiry())->except(['fullName', 'website'])->all(),
+    ]);
+    Mail::assertQueued(ContactInquiryReceived::class, function (ContactInquiryReceived $mail): bool {
         return $mail->hasTo('advisory@nextways.rw')
             && $mail->inquiry['fullName'] === 'Aline Uwase'
             && $mail->inquiry['message'] === 'We need support evaluating a regional cold-chain investment.';
@@ -45,7 +51,8 @@ it('rejects an incomplete inquiry without sending mail', function (): void {
     $response
         ->assertRedirect(route('contact'))
         ->assertSessionHasErrors(['fullName', 'organization', 'email', 'interest', 'message']);
-    Mail::assertNothingSent();
+    Mail::assertNothingOutgoing();
+    $this->assertDatabaseCount('contacts', 0);
 });
 
 it('rejects invalid inquiry values', function (string $field, string $invalidValue): void {
@@ -59,7 +66,8 @@ it('rejects invalid inquiry values', function (string $field, string $invalidVal
     );
 
     $response->assertRedirect(route('contact'))->assertSessionHasErrors($field);
-    Mail::assertNothingSent();
+    Mail::assertNothingOutgoing();
+    $this->assertDatabaseCount('contacts', 0);
 })->with([
     'invalid email' => ['email', 'not-an-email'],
     'unknown advisory area' => ['interest', 'Something else'],
@@ -77,4 +85,33 @@ it('escapes untrusted content in the inquiry email', function (): void {
     expect($html)
         ->not->toContain('<script>alert("xss")</script>')
         ->toContain('&lt;script&gt;alert("xss")&lt;/script&gt;');
+});
+
+it('stores optional fields as null', function (): void {
+    Mail::fake();
+    $inquiry = validInquiry();
+    unset($inquiry['phone'], $inquiry['location']);
+
+    $this->post(route('contact.store'), $inquiry)->assertRedirectToRoute('contact');
+
+    $this->assertDatabaseHas('contacts', ['email' => 'aline@example.com', 'phone' => null, 'location' => null]);
+    Mail::assertQueuedCount(1);
+});
+
+it('does not accept submissions without a configured email recipient', function (): void {
+    Mail::fake();
+    config()->set('mail.contact_to', '');
+
+    $this->post(route('contact.store'), validInquiry())->assertServerError();
+
+    $this->assertDatabaseCount('contacts', 0);
+    Mail::assertNothingOutgoing();
+});
+
+it('keeps the inquiry if the mail queue is unavailable', function (): void {
+    Mail::shouldReceive('to')->once()->andThrow(new RuntimeException('Queue unavailable'));
+
+    $this->post(route('contact.store'), validInquiry())->assertServerError();
+
+    expect(Contact::query()->sole()->email)->toBe('aline@example.com');
 });
