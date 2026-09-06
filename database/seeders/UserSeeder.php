@@ -15,6 +15,7 @@ final class UserSeeder extends Seeder
     public function run(): void
     {
         $users = [
+            [
             'name' => 'John Doe',
             'email' => 'info@nextways.rw',
             'password' => bcrypt('password'),
@@ -22,6 +23,7 @@ final class UserSeeder extends Seeder
             'email_verified_at' => now(),
             'created_at' => now(),
             'updated_at' => now(),
+            ],
 
         ];
         User::insert($users);
