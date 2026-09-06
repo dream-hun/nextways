@@ -1,2 +1,3 @@
 User-agent: *
 Disallow:
+Sitemap: https://nextways.rw/sitemap.xml
