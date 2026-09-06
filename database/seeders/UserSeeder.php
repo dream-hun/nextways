@@ -16,13 +16,13 @@ final class UserSeeder extends Seeder
     {
         $users = [
             [
-            'name' => 'John Doe',
-            'email' => 'info@nextways.rw',
-            'password' => bcrypt('password'),
-            'is_admin' => true,
-            'email_verified_at' => now(),
-            'created_at' => now(),
-            'updated_at' => now(),
+                'name' => 'John Doe',
+                'email' => 'info@nextways.rw',
+                'password' => bcrypt('password'),
+                'is_admin' => true,
+                'email_verified_at' => now(),
+                'created_at' => now(),
+                'updated_at' => now(),
             ],
 
         ];
