@@ -99,7 +99,7 @@ export function MarketingHead({
     organization?: boolean;
 }) {
     const page = usePage();
-    const { appUrl } = page.props;
+    const { appUrl, siteContact } = page.props;
     const canonical = new URL(page.url, appUrl).toString();
     const socialImage = new URL(image, appUrl).toString();
     const logoImage = new URL(BRAND_LOGO_PATH, appUrl).toString();
@@ -111,14 +111,16 @@ export function MarketingHead({
         url: appUrl,
         image: socialImage,
         logo: logoImage,
-        email: 'info@nextways.rw',
-        telephone: '+250788867106',
-        address: {
-            '@type': 'PostalAddress',
-            streetAddress: 'Norrsken House Kigali, KN 78 St, Kiyovu',
-            addressLocality: 'Kigali',
-            addressCountry: 'RW',
-        },
+        email: siteContact.email,
+        telephone: siteContact.phone,
+        address: siteContact.address,
+        sameAs: [
+            siteContact.linkedin,
+            siteContact.facebook,
+            siteContact.instagram,
+            siteContact.twitter,
+            siteContact.youtube,
+        ].filter(Boolean),
         areaServed: ['Rwanda'],
     };
 

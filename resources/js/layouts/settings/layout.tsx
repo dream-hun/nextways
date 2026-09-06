@@ -1,4 +1,4 @@
-import { Link } from '@inertiajs/react';
+import { Link, usePage } from '@inertiajs/react';
 import type { PropsWithChildren } from 'react';
 import Heading from '@/components/heading';
 import { Button } from '@/components/ui/button';
@@ -8,6 +8,7 @@ import { cn, toUrl } from '@/lib/utils';
 import { edit as editAppearance } from '@/routes/appearance';
 import { edit } from '@/routes/profile';
 import { edit as editSecurity } from '@/routes/security';
+import { edit as editSiteContact } from '@/routes/site-contact';
 import type { NavItem } from '@/types';
 
 const sidebarNavItems: NavItem[] = [
@@ -30,6 +31,13 @@ const sidebarNavItems: NavItem[] = [
 
 export default function SettingsLayout({ children }: PropsWithChildren) {
     const { isCurrentOrParentUrl } = useCurrentUrl();
+    const { auth } = usePage().props;
+    const navItems = auth.user.is_admin
+        ? [
+              ...sidebarNavItems,
+              { title: 'Site contact', href: editSiteContact(), icon: null },
+          ]
+        : sidebarNavItems;
 
     return (
         <div className="px-4 py-6">
@@ -41,7 +49,7 @@ export default function SettingsLayout({ children }: PropsWithChildren) {
             <div className="flex flex-col lg:flex-row lg:gap-12">
                 <aside className="w-full max-w-xl lg:w-48">
                     <nav className="flex flex-col gap-1" aria-label="Settings">
-                        {sidebarNavItems.map((item, index) => (
+                        {navItems.map((item, index) => (
                             <Button
                                 key={`${toUrl(item.href)}-${index}`}
                                 size="sm"

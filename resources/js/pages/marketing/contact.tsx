@@ -3,7 +3,7 @@ import {
     MarketingHead,
     PageHero,
 } from '@/components/marketing/site';
-import { Form } from '@inertiajs/react';
+import { Form, usePage } from '@inertiajs/react';
 import { store } from '@/routes/contact';
 import { cn } from '@/lib/utils';
 
@@ -19,6 +19,7 @@ const interests = [
 ];
 
 export default function Contact() {
+    const { siteContact } = usePage().props;
     return (
         <>
             <MarketingHead
@@ -53,72 +54,43 @@ export default function Contact() {
                             {[
                                 {
                                     label: 'Head office',
-                                    value: (
-                                        <>
-                                            Norrsken House Kigali
-                                            <br />
-                                            KN 78 St, Kiyovu
-                                            <br />
-                                            Nyarugenge, Kigali, Rwanda
-                                        </>
-                                    ),
+                                    value: siteContact.address,
                                 },
                                 {
                                     label: 'Registered office',
-                                    value: (
-                                        <>
-                                            KN1 Road 30
-                                            <br />
-                                            Muhima, Nyarugenge
-                                            <br />
-                                            Kigali, Rwanda
-                                        </>
-                                    ),
+                                    value: siteContact.registered_address,
                                 },
+                                { label: 'Phone', value: siteContact.phone },
                                 {
-                                    label: 'Phone',
-                                    value: (
-                                        <>
-                                            <a
-                                                href="tel:+250788867106"
-                                                className="text-forest hover:text-sage font-bold"
-                                            >
-                                                +250 788 867 106
-                                            </a>
-                                            <br />
-                                            <a
-                                                href="tel:+250788304638"
-                                                className="text-forest hover:text-sage font-bold"
-                                            >
-                                                +250 788 304 638
-                                            </a>
-                                        </>
-                                    ),
+                                    label: 'Alternative phone',
+                                    value: siteContact.secondary_phone,
                                 },
                                 {
                                     label: 'Email',
                                     value: (
                                         <a
-                                            href="mailto:info@nextways.rw"
+                                            href={`mailto:${siteContact.email}`}
                                             className="text-forest hover:text-sage font-bold"
                                         >
-                                            info@nextways.rw
+                                            {siteContact.email}
                                         </a>
                                     ),
                                 },
-                            ].map((block) => (
-                                <div
-                                    key={block.label}
-                                    className="border-mkt-line border-b py-5"
-                                >
-                                    <h3 className="text-sage mb-2 text-xs font-bold tracking-[0.17em] uppercase">
-                                        {block.label}
-                                    </h3>
-                                    <p className="text-ink text-[0.95rem] leading-relaxed">
-                                        {block.value}
-                                    </p>
-                                </div>
-                            ))}
+                            ]
+                                .filter((block) => block.value)
+                                .map((block) => (
+                                    <div
+                                        key={block.label}
+                                        className="border-mkt-line border-b py-5"
+                                    >
+                                        <h3 className="text-sage mb-2 text-xs font-bold tracking-[0.17em] uppercase">
+                                            {block.label}
+                                        </h3>
+                                        <p className="text-ink text-[0.95rem] leading-relaxed">
+                                            {block.value}
+                                        </p>
+                                    </div>
+                                ))}
                         </div>
                     </div>
 
@@ -346,7 +318,7 @@ export default function Contact() {
                                             aria-live="polite"
                                         >
                                             {recentlySuccessful
-                                                ? 'Thank you. Your inquiry has been sent.'
+                                                ? 'Thank you. Your inquiry has been received.'
                                                 : 'We respect the context behind every brief.'}
                                         </span>
                                         <button
