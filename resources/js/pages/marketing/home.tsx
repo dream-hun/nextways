@@ -67,7 +67,7 @@ export default function Home() {
                 organization
             />
 
-            <PageHero
+            <PageHero 
                 image={MARKETING_HERO_IMAGES.home}
                 title={
                     <>
