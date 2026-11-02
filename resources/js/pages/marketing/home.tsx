@@ -60,12 +60,7 @@ const whyItems = [
 export default function Home() {
     return (
         <>
-            <MarketingHead
-                title="Sustainable advisory in Rwanda"
-                description="Rwandan advisory firm helping organizations turn environmental, agribusiness, and sustainability ambitions into practical, measurable results."
-                image={MARKETING_HERO_IMAGES.home.fallbackSrc}
-                organization
-            />
+            <MarketingHead />
 
             <PageHero
                 image={MARKETING_HERO_IMAGES.home}

@@ -79,11 +79,7 @@ const delivery = [
 export default function Projects() {
     return (
         <>
-            <MarketingHead
-                title="Projects"
-                description="Selected Next Ways feasibility and value-chain assignments grounded in field evidence across Rwanda."
-                image={MARKETING_HERO_IMAGES.projects.fallbackSrc}
-            />
+            <MarketingHead />
 
             <PageHero
                 image={MARKETING_HERO_IMAGES.projects}

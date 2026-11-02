@@ -4,16 +4,15 @@ declare(strict_types=1);
 
 use App\Http\Controllers\ContactInquiryController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\MarketingPageController;
 use App\Http\Controllers\SitemapController;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
-use Inertia\Response;
 
-Route::get('/', fn (): Response => Inertia::render('marketing/home'))->name('home');
-Route::get('about', fn (): Response => Inertia::render('marketing/about'))->name('about');
-Route::get('services', fn (): Response => Inertia::render('marketing/services'))->name('services');
-Route::get('projects', fn (): Response => Inertia::render('marketing/projects'))->name('projects');
-Route::get('contact', fn (): Response => Inertia::render('marketing/contact'))->name('contact');
+Route::get('/', MarketingPageController::class)->name('home');
+Route::get('about', MarketingPageController::class)->name('about');
+Route::get('services', MarketingPageController::class)->name('services');
+Route::get('projects', MarketingPageController::class)->name('projects');
+Route::get('contact', MarketingPageController::class)->name('contact');
 Route::get('sitemap.xml', SitemapController::class)->name('sitemap');
 Route::post('contact', ContactInquiryController::class)
     ->middleware('throttle:5,1')

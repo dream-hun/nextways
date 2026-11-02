@@ -47,8 +47,37 @@
         @viteReactRefresh
         @vite(['resources/css/app.css', 'resources/js/app.tsx', "resources/js/pages/{$page['component']}.tsx"])
         <x-inertia::head>
-            <title>{{ config('app.name', 'Laravel') }}</title>
+            @php($seo = $page['props']['seo'] ?? null)
+            @if ($seo)
+                <title>{{ $seo['fullTitle'] }}</title>
+                <meta data-inertia="description" name="description" content="{{ $seo['description'] }}">
+                <link data-inertia="canonical" rel="canonical" href="{{ $seo['canonical'] }}">
+                <meta data-inertia="og-site-name" property="og:site_name" content="{{ $seo['siteName'] }}">
+                <meta data-inertia="og-locale" property="og:locale" content="en_GB">
+                <meta data-inertia="og-type" property="og:type" content="website">
+                <meta data-inertia="og-title" property="og:title" content="{{ $seo['fullTitle'] }}">
+                <meta data-inertia="og-description" property="og:description" content="{{ $seo['description'] }}">
+                <meta data-inertia="og-url" property="og:url" content="{{ $seo['canonical'] }}">
+                <meta data-inertia="og-image" property="og:image" content="{{ $seo['image'] }}">
+                <meta data-inertia="og-image-type" property="og:image:type" content="image/jpeg">
+                <meta data-inertia="og-image-width" property="og:image:width" content="1200">
+                <meta data-inertia="og-image-height" property="og:image:height" content="630">
+                <meta data-inertia="og-image-alt" property="og:image:alt" content="{{ $seo['imageAlt'] }}">
+                <meta data-inertia="twitter-card" name="twitter:card" content="summary_large_image">
+                <meta data-inertia="twitter-title" name="twitter:title" content="{{ $seo['fullTitle'] }}">
+                <meta data-inertia="twitter-description" name="twitter:description" content="{{ $seo['description'] }}">
+                <meta data-inertia="twitter-image" name="twitter:image" content="{{ $seo['image'] }}">
+                <meta data-inertia="twitter-image-alt" name="twitter:image:alt" content="{{ $seo['imageAlt'] }}">
+                @if ($seo['schema'])
+                    <script data-inertia="schema" type="application/ld+json">{!! json_encode($seo['schema'], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP | JSON_THROW_ON_ERROR) !!}</script>
+                @endif
+            @else
+                <title>{{ config('app.name', 'Laravel') }}</title>
+            @endif
         </x-inertia::head>
+        @unless (isset($page['props']['seo']))
+            <meta name="robots" content="noindex, nofollow">
+        @endunless
     </head>
     <body class="font-sans antialiased">
         <!-- Google Tag Manager (noscript) -->

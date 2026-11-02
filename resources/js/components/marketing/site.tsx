@@ -1,7 +1,7 @@
 import { Head, Link, usePage } from '@inertiajs/react';
 import { ReactLenis, useLenis } from 'lenis/react';
 import { useEffect, useState, type ReactNode } from 'react';
-import BrandLogo, { BRAND_LOGO_PATH } from '@/components/brand-logo';
+import BrandLogo from '@/components/brand-logo';
 import Footer from '@/components/marketing/footer';
 import { about, contact, home, projects, services } from '@/routes';
 import {
@@ -87,83 +87,106 @@ export const MARKETING_HERO_IMAGES = {
     },
 } as const satisfies Record<MarketingRouteName, PageHeroImage>;
 
-export function MarketingHead({
-    title,
-    description,
-    image = '/images/nextways-fieldwork.png',
-    organization = false,
-}: {
+export type MarketingSeo = {
     title: string;
+    fullTitle: string;
     description: string;
-    image?: string;
-    organization?: boolean;
-}) {
-    const page = usePage();
-    const { appUrl, siteContact } = page.props;
-    const canonical = new URL(page.url, appUrl).toString();
-    const socialImage = new URL(image, appUrl).toString();
-    const logoImage = new URL(BRAND_LOGO_PATH, appUrl).toString();
-    const fullTitle = `${title} - Next Ways`;
-    const organizationData = {
-        '@context': 'https://schema.org',
-        '@type': 'ProfessionalService',
-        name: 'Next Ways',
-        url: appUrl,
-        image: socialImage,
-        logo: logoImage,
-        email: siteContact.email,
-        telephone: siteContact.phone,
-        address: siteContact.address,
-        sameAs: [
-            siteContact.linkedin,
-            siteContact.facebook,
-            siteContact.instagram,
-            siteContact.twitter,
-            siteContact.youtube,
-        ].filter(Boolean),
-        areaServed: ['Rwanda'],
-    };
+    canonical: string;
+    image: string;
+    imageAlt: string;
+    siteName: string;
+    schema: Record<string, unknown> | null;
+};
+
+/**
+ * Mirrors the server-rendered SEO tags in app.blade.php. Each head-key matches
+ * a data-inertia attribute there so client navigation replaces, never duplicates.
+ */
+export function MarketingHead() {
+    const { seo } = usePage<{ seo: MarketingSeo }>().props;
 
     return (
         <Head>
-            <title>{title}</title>
-            <meta key="description" name="description" content={description} />
-            <link key="canonical" rel="canonical" href={canonical} />
-            <meta key="og-title" property="og:title" content={fullTitle} />
+            <title>{seo.title}</title>
             <meta
-                key="og-description"
-                property="og:description"
-                content={description}
+                head-key="description"
+                name="description"
+                content={seo.description}
             />
-            <meta key="og-type" property="og:type" content="website" />
-            <meta key="og-url" property="og:url" content={canonical} />
-            <meta key="og-image" property="og:image" content={socialImage} />
+            <link head-key="canonical" rel="canonical" href={seo.canonical} />
             <meta
-                key="twitter-card"
+                head-key="og-site-name"
+                property="og:site_name"
+                content={seo.siteName}
+            />
+            <meta head-key="og-locale" property="og:locale" content="en_GB" />
+            <meta head-key="og-type" property="og:type" content="website" />
+            <meta
+                head-key="og-title"
+                property="og:title"
+                content={seo.fullTitle}
+            />
+            <meta
+                head-key="og-description"
+                property="og:description"
+                content={seo.description}
+            />
+            <meta head-key="og-url" property="og:url" content={seo.canonical} />
+            <meta head-key="og-image" property="og:image" content={seo.image} />
+            <meta
+                head-key="og-image-type"
+                property="og:image:type"
+                content="image/jpeg"
+            />
+            <meta
+                head-key="og-image-width"
+                property="og:image:width"
+                content="1200"
+            />
+            <meta
+                head-key="og-image-height"
+                property="og:image:height"
+                content="630"
+            />
+            <meta
+                head-key="og-image-alt"
+                property="og:image:alt"
+                content={seo.imageAlt}
+            />
+            <meta
+                head-key="twitter-card"
                 name="twitter:card"
                 content="summary_large_image"
             />
             <meta
-                key="twitter-title"
+                head-key="twitter-title"
                 name="twitter:title"
-                content={fullTitle}
+                content={seo.fullTitle}
             />
             <meta
-                key="twitter-description"
+                head-key="twitter-description"
                 name="twitter:description"
-                content={description}
+                content={seo.description}
             />
             <meta
-                key="twitter-image"
+                head-key="twitter-image"
                 name="twitter:image"
-                content={socialImage}
+                content={seo.image}
             />
-            {organization && (
+            <meta
+                head-key="twitter-image-alt"
+                name="twitter:image:alt"
+                content={seo.imageAlt}
+            />
+            {seo.schema && (
                 <script
-                    key="organization-schema"
+                    head-key="schema"
                     type="application/ld+json"
                     dangerouslySetInnerHTML={{
-                        __html: JSON.stringify(organizationData),
+                        __html: JSON.stringify(seo.schema).replace(
+                            /</g,
+                            '\\u003c',
+                        ),
                     }}
                 />
             )}

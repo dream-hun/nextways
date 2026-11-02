@@ -116,11 +116,7 @@ const serviceGroups = [
 export default function Services() {
     return (
         <>
-            <MarketingHead
-                title="Services"
-                description="Environmental, agribusiness, cold-chain, feasibility, evaluation, digital agriculture, and rural logistics advisory in Rwanda and East Africa."
-                image={MARKETING_HERO_IMAGES.services.fallbackSrc}
-            />
+            <MarketingHead />
 
             <PageHero
                 image={MARKETING_HERO_IMAGES.services}
