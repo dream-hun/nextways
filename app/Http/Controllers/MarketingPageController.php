@@ -117,6 +117,6 @@ final class MarketingPageController extends Controller
     {
         $path = mb_ltrim($path, '/');
 
-        return mb_rtrim((string) config('app.url'), '/').'/'.$path;
+        return mb_rtrim(config()->string('app.url'), '/').'/'.$path;
     }
 }

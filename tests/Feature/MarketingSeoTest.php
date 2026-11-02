@@ -28,21 +28,19 @@ test('marketing pages render search and social meta tags in the initial HTML', f
 ]);
 
 test('marketing pages each have a unique meta description of search-friendly length', function (): void {
-    $descriptions = collect(['home', 'about', 'services', 'projects', 'contact'])
-        ->map(function (string $routeName): string {
-            $description = null;
+    $descriptions = [];
 
-            $this->get(route($routeName))->assertInertia(function (Assert $page) use (&$description): Assert {
-                $description = $page->toArray()['props']['seo']['description'];
+    foreach (['home', 'about', 'services', 'projects', 'contact'] as $routeName) {
+        $this->get(route($routeName))->assertInertia(function (Assert $page) use (&$descriptions): Assert {
+            return $page->where('seo.description', function (string $description) use (&$descriptions): bool {
+                $descriptions[] = $description;
 
-                return $page;
+                return mb_strlen($description) >= 120 && mb_strlen($description) <= 160;
             });
-
-            return $description;
         });
+    }
 
-    expect($descriptions->unique())->toHaveCount(5)
-        ->and($descriptions->every(fn (string $description): bool => mb_strlen($description) >= 120 && mb_strlen($description) <= 160))->toBeTrue();
+    expect(array_unique($descriptions))->toHaveCount(5);
 });
 
 test('the canonical URL ignores query strings', function (): void {
