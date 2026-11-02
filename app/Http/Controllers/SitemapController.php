@@ -5,20 +5,27 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Response;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\URL;
 
 final class SitemapController extends Controller
 {
-    private const string SITE_URL = 'https://nextways.rw';
+    /**
+     * Public marketing routes listed in the sitemap.
+     *
+     * lastmod is intentionally omitted: a date that changes on every request
+     * teaches search engines to ignore it, and the pages have no reliable
+     * modification date.
+     *
+     * @var list<string>
+     */
+    private const array ROUTES = ['home', 'about', 'services', 'projects', 'contact'];
 
     public function __invoke(): Response
     {
-        $urls = collect(['home', 'about', 'services', 'projects', 'contact'])
-            ->map(fn (string $route): array => [
-                'loc' => self::SITE_URL.'/'.mb_ltrim((string) parse_url(URL::route($route), PHP_URL_PATH), '/'),
-                'lastmod' => Carbon::now()->toDateString(),
-            ]);
+        $siteUrl = mb_rtrim(config()->string('app.url'), '/');
+
+        $urls = collect(self::ROUTES)
+            ->map(fn (string $route): string => $siteUrl.'/'.mb_ltrim((string) parse_url(URL::route($route), PHP_URL_PATH), '/'));
 
         return response()
             ->view('sitemap', ['urls' => $urls])
