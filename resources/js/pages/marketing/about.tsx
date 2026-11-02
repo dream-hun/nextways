@@ -19,11 +19,7 @@ const approachPoints = [
 export default function About() {
     return (
         <>
-            <MarketingHead
-                title="About"
-                description="Meet Next Ways Ltd, a Rwandan advisory practice combining fieldwork, evidence, and implementation discipline."
-                image={MARKETING_HERO_IMAGES.about.fallbackSrc}
-            />
+            <MarketingHead />
 
             <PageHero
                 image={MARKETING_HERO_IMAGES.about}

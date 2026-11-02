@@ -22,11 +22,7 @@ export default function Contact() {
     const { siteContact } = usePage().props;
     return (
         <>
-            <MarketingHead
-                title="Contact"
-                description="Contact Next Ways Ltd in Kigali about environmental, agribusiness, feasibility, evaluation, digital agriculture, or rural logistics advisory."
-                image={MARKETING_HERO_IMAGES.contact.fallbackSrc}
-            />
+            <MarketingHead />
             <PageHero
                 image={MARKETING_HERO_IMAGES.contact}
                 title={

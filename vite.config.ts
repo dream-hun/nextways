@@ -74,6 +74,7 @@ export default defineConfig({
             '.agents/**',
             '.lerd.yaml',
             '.github/**',
+            '.mcp.json',
             'AGENTS.md',
             'boost.json',
             'composer.json',
